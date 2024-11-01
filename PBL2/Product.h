@@ -32,12 +32,19 @@ void Product::Xuat() {
     cout << "\tSo Luong: " << sl << "\tDon vi: " << donVi << "\tDon gia: " << donGia << endl;
 }
 void Product::docFile(ifstream &file){
-  string line; 
+  string line; //biến này dùng để lưu nội dung 1 hàng
   if (file.tellg() == 0)
   getline(file, line);
-  if (getline(file, line)) { 
-    stringstream ss(line);  
-    getline(ss, ID, '|'); 
+  if (getline(file, line)) { //Đọc 1 dòng trong file r lưu vào biến line
+    stringstream ss(line);  /*Lấy dữ liệu biến line để tạo biến ss
+Kiểu stringstream giúp ta đọc/ghi dữ liệu từ chuỗi truyền vào
+Tức là dòng stringstream ss(line) dùng để lấy dữ liệu từ chuỗi line rồi từ đó
+đọc/ghi trên  nội dung của line đó
+*/
+    getline(ss, ID, '|'); //Như ở đây, ta đọc dữ liệu từ ss r lưu vào biến ID
+//Câu lệnh này có nghĩa là đọc dl từ ss đến khi gặp kí tự |, rồi lưu vào biến ID
+/*Chú ý, getline đọc dl xong trả về kiểu string. Nên với dl dạng số, ta nên
+đọc bằng >> (chính là cin ấy), hoặc đọc = getline rồi chuyển kiểu */
    getline(ss, name, '|');
         getline(ss, donVi, '|');
         ss >> sl;
