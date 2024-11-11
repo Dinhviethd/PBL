@@ -32,12 +32,12 @@ void Product::Xuat() {
     cout << "\tSo Luong: " << sl << "\tDon vi: " << donVi << "\tDon gia: " << donGia << endl;
 }
 void Product::docFile(ifstream &file){
-  string line;
+  string line; 
   if (file.tellg() == 0)
   getline(file, line);
   if (getline(file, line)) { 
     stringstream ss(line);  
-    getline(ss, ID, '|');
+    getline(ss, ID, '|'); 
    getline(ss, name, '|');
         getline(ss, donVi, '|');
         ss >> sl;

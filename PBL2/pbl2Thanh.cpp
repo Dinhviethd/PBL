@@ -59,25 +59,32 @@ void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
         l2.insertNode(k);
     }
 }
-void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list[150]){
-        int n=0;
-        if (tl==0) return; 
-        else if (tl == 1){
-            list[n] = new Product;
-            l1.insertNode(list[n]);
-            }
-        else if (tl == 2){
-            list[n] = new Kho;
-            l2.insertNode(list[n]);
-            }
-        else if (tl == 3){
-            list[n] = new Manager;
-            l3.insertNode(list[n]);
-            }
-        else if (tl==0) return;
-        else cout<<"Lua chon khong hop le!! Vui long nhap lai"<<endl;
-        list[n++]->Nhap();
+void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list[150]) {
+    int n = 0;
+
+    if (tl == 0) return;
+    if (tl == 1) {
+        list[n] = new Product;
+    } else if (tl == 2) {
+        list[n] = new Kho;
+    } else if (tl == 3) {
+        list[n] = new Manager;
+    } else {
+        cout << "Lua chon khong hop le!! Vui long nhap lai" << endl;
+        return;
+    }
+    list[n]->Nhap();
+    if (tl == 1) {
+        l1.insertNode(list[n]);
+    } else if (tl == 2) {
+        l2.insertNode(list[n]);
+    } else if (tl == 3) {
+        l3.insertNode(list[n]);
+    }
+
+    n++;
 }
+
 int selectOption(){
     int tl;
     cout <<"0. Thoat"<<endl;
@@ -126,6 +133,7 @@ int main(){
           		cout << "Moi ban nhap thong tin can them: " << endl;
                 tl=selectOption();
                 nhapBanPhim(l1, l2, l3, tl, list);
+                
                 break;
           	case 2:
 			  	cout << "Moi ban nhap thong tin can xem: " << endl;
@@ -161,19 +169,26 @@ int main(){
                 if (tl==0) break;
                 cout<<"\nChon loai du lieu can tim kiem (1: ID, 2: Ten): ";
                 cin>>tl1;
+                bool found=false;
+                Node *foundNode= NULL;
                 if (tl1==1){
                     cout<<"Nhap ID can tim kiem: "; 
                     cin>>ID;
-                    if (tl==1) l1.search(ID, "ID");
-                    else if (tl==2) l2.search(ID, "ID");
-                    else if (tl==3) l3.search(ID, "ID");}
+                    if (tl==1) found=l1.search(ID, "ID", foundNode);
+                    else if (tl==2) found=l2.search(ID, "ID", foundNode);
+                    else if (tl==3) found=l3.search(ID, "ID", foundNode);}
                     else if (tl1==2){
                         cout<<"Nhap ten can tim kiem: ";
                         getline(cin >> ws, name);
-                        if (tl==1) l1.search(name, "name");
-                        else if (tl==2) l2.search(name, "name");
-                        else if (tl==3) l3.search(name, "name");}
+                        if (tl==1) found=l1.search(name, "name",foundNode);
+                        else if (tl==2) found=l2.search(name, "name",foundNode);
+                        else if (tl==3) found=l3.search(name, "name",foundNode);}
                     else cout<<"Kieu du lieu can tim kiem khong hop le"<<endl;
+                    if (found) {
+                        cout << "Tim thay phan tu can tim:\n";
+                        foundNode->data->Xuat();
+                        system("pause");
+                    } else cout << "Khong tim thay gia tri can tim\n";
                 break;	    
 	}
         }
