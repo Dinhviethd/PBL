@@ -37,16 +37,11 @@ void xoaThongTin(LinkList &l1, LinkList &l2, LinkList &l3, int tl){
 }
 void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
              multimap<string, Product*>& products,
-             multimap<string, Manager*>& managers){
-    ifstream fileProduct("product.txt");
+             multimap<string, Kho*>& khoMap,
+             multimap<string, Manager*>& managers) {
     ifstream fileKho("kho.txt");
+    ifstream fileProduct("product.txt");
     ifstream fileManager("manager.txt");
-    while (!fileProduct.eof()) {
-        Product *p = new Product;
-        p->docFile(fileProduct);
-        products.insert({p->getID(), p});
-        l1.insertNode(p);
-    }
     while (!fileManager.eof()) {
         Manager *m = new Manager;
         m->docFile(fileManager);
@@ -55,10 +50,23 @@ void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
     }
     while (!fileKho.eof()) {
         Kho *k = new Kho;
-        k->docFile(fileKho, products, managers);
+        k->docFile(fileKho, managers);  
+        khoMap.insert({k->getID(), k});
         l2.insertNode(k);
     }
+    while (!fileProduct.eof()) {
+        Product *p = new Product;
+        p->docFile(fileProduct, khoMap);  
+        if (!p->getID().empty()) {  
+        products.insert({p->getID(), p});
+        l1.insertNode(p);
+    } else {
+        delete p;  
+    }
+    }
+
 }
+
 void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list) {
     string info;
     if (tl == 0) return;
@@ -83,7 +91,7 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
         if (l2.search(info, "ID", foundNode)) {
             Kho *selectedKho = (Kho*)foundNode->data;  
             if (selectedKho) {
-                selectedKho->addProduct(newProduct);  
+                newProduct->themSPVaoKho(selectedKho);  
                 cout << "Da them san pham vao kho: " << selectedKho->getName() << endl;
             } else {
                 cout << "Khong tim thay kho phu hop!" << endl;
@@ -113,7 +121,8 @@ int main(){
     int tl, tl6;
     multimap<string, Product*> products;
     multimap<string, Manager*> managers;
-    docFile(l1,l2,l3, products, managers);
+    multimap<string, Kho*> kho;
+    docFile(l1,l2,l3, products, kho,managers);
 	string username, password;
     int choice;
     login:
