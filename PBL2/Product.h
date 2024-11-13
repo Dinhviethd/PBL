@@ -8,7 +8,7 @@
 using namespace std;
 class Product : public Entity {
 protected:
-    string donVi;
+    string loai, donVi;
     int sl;
     float donGia;
 public:

@@ -226,13 +226,13 @@ int main(){
                         system("pause");
                     } else cout << "Khong tim thay gia tri can tim\n";
                 break;	
-            case 7:
-                tl=selectOption();
-                int tl1;
-                if (tl==1){
-                    cout<<"Chon kieu du lieu can thong ke: ";
-                    cin>>tl1;
-                }
+            // case 7: (cha biet sao nhap xuong duoi nay thi code k chay duoc nen t tam de option len ke cuoi, tam thoi bo qua cai nay)
+            //     tl=selectOption();
+            //     int tl1;
+            //     if (tl==1){
+            //         cout<<"Chon kieu du lieu can thong ke: ";
+            //         cin>>tl1;
+            //     }
 
 	}
         }

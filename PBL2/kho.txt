@@ -1,6 +1,6 @@
-ID|Ten|SucChua|
-0001|Kho A|
-0022|Kho B|
-0003|Kho B|
-0004|Kho F|
-0005|Kho F|
+ID|Ten|SucChua|Manager ID|
+0001|Kho A|100|001
+0022|Kho B|200|002
+0003|Kho B|50|001
+0004|Kho F|300|003
+0005|Kho F|40|004

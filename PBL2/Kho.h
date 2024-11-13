@@ -11,6 +11,7 @@
 using namespace std;
 class Kho : public Entity {
     string date;
+    int capacity, current_size = 0;
     Manager *qli= nullptr;
     Product *sp=nullptr;
 public:
