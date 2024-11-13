@@ -85,6 +85,21 @@ Kho *chonKho(LinkList &l2, int sl) {
         }
     }
 }
+Kho *chonKhoDeQuanLy(LinkList &l2) {
+    string info;
+    while (true) {
+        cout << "Nhap ID kho muon gan quan ly: ";
+        cin >> info;
+        Node *foundNode = nullptr;
+        if (l2.search(info, "ID", foundNode)) {
+            Kho *selectedKho = (Kho *)foundNode->data;
+            cout << "Da chon kho: " << selectedKho->getName() << " (ID: " << selectedKho->getID() << ")" << endl;
+            return selectedKho;
+        } else {
+            cout << "Khong tim thay kho voi ID nay. Vui long nhap lai!" << endl;
+        }
+    }
+}
 void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list) {
     if (tl == 0) return;
 
@@ -92,22 +107,25 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
         list = new Product;
         list->Nhap();  // Nhập thông tin sản phẩm.
         l1.insertNode(list);
-
         Product *newProduct = (Product *)list;
-        xuatThongTin(l1, l2, l3, 2); 
-        Kho *selectedKho = chonKho(l2, newProduct->getSL());  // Chọn kho và kiểm tra sức chứa.
-
+        xuatThongTin(l1, l2, l3, 2); // Hiển thị danh sách kho
+        Kho *selectedKho = chonKho(l2, newProduct->getSL());  // Chọn kho và kiểm tra sức chứa
         if (selectedKho) {
             newProduct->themSPVaoKho(selectedKho);
         }
-    } else if (tl == 2) {
-        list = new Kho;
-        list->Nhap();
-        l2.insertNode(list);
+        else {
+        cout << "Lua chon khong hop le!! Vui long nhap lai." << endl;
+    }
     } else if (tl == 3) {
         list = new Manager;
-        list->Nhap();
+        list->Nhap();  // Nhập thông tin quản lý
         l3.insertNode(list);
+        Manager *newManager = (Manager *)list;
+        xuatThongTin(l1, l2, l3, 2);  // Hiển thị danh sách kho
+        Kho *selectedKho = chonKhoDeQuanLy(l2);  // Chọn kho để quản lý
+        if (selectedKho) {
+            selectedKho->addManager(newManager);  // Gán quản lý cho kho
+        }
     } else {
         cout << "Lua chon khong hop le!! Vui long nhap lai." << endl;
     }
@@ -163,6 +181,7 @@ int main(){
           		cout << "Moi ban nhap thong tin can them: " << endl;
                 tl=selectOption();
                 nhapBanPhim(l1, l2, l3, tl, list);
+                system("pause");
                 break;
           	case 2:
 			  	cout << "Moi ban nhap thong tin can xem: " << endl;

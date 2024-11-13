@@ -33,7 +33,7 @@ void Product::Nhap() {
 void Product::Xuat() {
     Entity::Xuat();
     cout << "\tSo Luong: " << sl << "\tDon vi: " << donVi << "\tDon gia: " << donGia;
-    if (kho) cout << "Thuoc kho: " << kho->getName() << " (ID: " << kho->getID() << ")" << endl;
+    if (kho) cout << "   Thuoc kho: " << kho->getName() << " (ID: " << kho->getID() << ")" << endl;
     else cout << "Chua duoc them vao kho." << endl;
 }
 void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
