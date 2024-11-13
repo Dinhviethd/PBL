@@ -7,7 +7,7 @@
 #include "Manager.h"
 #include "Entity.h"
 #include "Product.h"
-#include <unordered_map>
+#include <map>
 using namespace std;
 class Kho : public Entity {
     string date;
@@ -16,7 +16,8 @@ class Kho : public Entity {
 public:
     void Nhap();
     void Xuat();
-    void docFile(ifstream &f, unordered_map<string, Product*>& products, unordered_map<string, Manager*>& managers);
+    void docFile(ifstream &f, multimap<string, Product*>& products, multimap<string, Manager*>& managers);
+    void addProduct(Product *prod);
 };
 void Kho::Nhap() {
     Entity::Nhap();
@@ -30,7 +31,7 @@ void Kho::Xuat() {
     if (qli) cout<< "   ID quan li: "<<qli->getID()<<endl;
     else cout<<endl;
 }
-void Kho::docFile(ifstream &file, unordered_map<string, Product*>& products, unordered_map<string, Manager*>& managers){
+void Kho::docFile(ifstream &file, multimap<string, Product*>& products, multimap<string, Manager*>& managers){
     string line, productID, managerID;
     if (file.tellg() == 0)
         getline(file, line);
@@ -45,10 +46,18 @@ void Kho::docFile(ifstream &file, unordered_map<string, Product*>& products, uno
         // maxsize=stoi(str);
         getline(ss, productID, '|');
         getline(ss, managerID, '|');
-        if (products.find(productID) != products.end())
-        sp = products[productID];
-        if (managers.find(managerID) != managers.end())
-        qli = managers[managerID];
-}
+        auto productRange = products.equal_range(productID);
+        for (auto it = productRange.first; it != productRange.second; ++it) {
+            addProduct(it->second); // add each matching product
+        }
+
+        // Assign a manager pointer if managerID exists in `managers`
+        auto managerRange = managers.equal_range(managerID);
+        if (managerRange.first != managerRange.second) {
+            qli = managerRange.first->second; // Assigns the first found manager
+        }
+}}
+void Kho::addProduct(Product *pro){
+    sp=pro;
 }
 #endif

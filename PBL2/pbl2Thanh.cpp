@@ -36,21 +36,21 @@ void xoaThongTin(LinkList &l1, LinkList &l2, LinkList &l3, int tl){
 }
 }
 void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
-             unordered_map<string, Product*>& products,
-             unordered_map<string, Manager*>& managers){
+             multimap<string, Product*>& products,
+             multimap<string, Manager*>& managers){
     ifstream fileProduct("product.txt");
     ifstream fileKho("kho.txt");
     ifstream fileManager("manager.txt");
     while (!fileProduct.eof()) {
         Product *p = new Product;
         p->docFile(fileProduct);
-        products[p->getID()] = p;
+        products.insert({p->getID(), p});
         l1.insertNode(p);
     }
     while (!fileManager.eof()) {
         Manager *m = new Manager;
         m->docFile(fileManager);
-        managers[m->getID()] = m;
+        managers.insert({m->getID(), m});
         l3.insertNode(m);
     }
     while (!fileKho.eof()) {
@@ -59,47 +59,60 @@ void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
         l2.insertNode(k);
     }
 }
-void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list[150]) {
-    int n = 0;
-
+void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list) {
+    string info;
     if (tl == 0) return;
     if (tl == 1) {
-        list[n] = new Product;
+        list = new Product;
     } else if (tl == 2) {
-        list[n] = new Kho;
+        list = new Kho;
     } else if (tl == 3) {
-        list[n] = new Manager;
+        list = new Manager;
     } else {
         cout << "Lua chon khong hop le!! Vui long nhap lai" << endl;
         return;
     }
-    list[n]->Nhap();
+    list->Nhap();
     if (tl == 1) {
-        l1.insertNode(list[n]);
+        l1.insertNode(list);
+        Product *newProduct= (Product*)list;
+        xuatThongTin(l1, l2, l3, 2);
+        cout << "Vui long nhap ID kho chua san pham: ";
+        cin >> info; 
+        Node *foundNode = nullptr;
+        if (l2.search(info, "ID", foundNode)) {
+            Kho *selectedKho = (Kho*)foundNode->data;  
+            if (selectedKho) {
+                selectedKho->addProduct(newProduct);  
+                cout << "Da them san pham vao kho: " << selectedKho->getName() << endl;
+            } else {
+                cout << "Khong tim thay kho phu hop!" << endl;
+            }
+        } else {
+            cout << "Khong tim thay kho phu hop!" << endl;
+        }
     } else if (tl == 2) {
-        l2.insertNode(list[n]);
+        l2.insertNode(list);
     } else if (tl == 3) {
-        l3.insertNode(list[n]);
+        l3.insertNode(list);
     }
-
-    n++;
 }
 
 int selectOption(){
     int tl;
-    cout <<"0. Thoat"<<endl;
     cout << "1. Hang hoa" << endl;
     cout << "2. Kho" << endl;
     cout << "3. Nguoi quan ly" << endl;
+    cout << "0. Thoat"<<endl;
     cin >> tl;
     return tl;
 }
 int main(){
     LinkList l1,l2,l3;
-    Entity *list[150];
-    int tl;
-    unordered_map<string, Product*> products;
-    unordered_map<string, Manager*> managers;
+    Entity *list;
+    int tl, tl6;
+    multimap<string, Product*> products;
+    multimap<string, Manager*> managers;
     docFile(l1,l2,l3, products, managers);
 	string username, password;
     int choice;
@@ -120,8 +133,10 @@ int main(){
           cout << "1. Them thong tin\n";
           cout << "2. Xem thong tin\n";
           cout << "3. Xoa thong tin\n";
-          cout <<"4. Khoi phuc thong tin vua xoa\n";
+          cout << "4. Khoi phuc thong tin vua xoa\n";
           cout << "5. Tim kiem thong tin (theo ID/Ten)\n";
+          cout << "6. Sap xep theo ID/Ten\n";
+          cout<< "7. Thong ke thong tin vat tu\n";
           cout << "0. Dang Xuat\n";
           cout << "========================\n";
           cout << "Chon: ";
@@ -133,7 +148,6 @@ int main(){
           		cout << "Moi ban nhap thong tin can them: " << endl;
                 tl=selectOption();
                 nhapBanPhim(l1, l2, l3, tl, list);
-                
                 break;
           	case 2:
 			  	cout << "Moi ban nhap thong tin can xem: " << endl;
@@ -162,6 +176,28 @@ int main(){
                 else if (tl==3) l3.undoDelete();
                 cout<<"Khoi phuc thong tin thanh cong!!";
 				break;	
+            case 6:
+            	tl=selectOption();
+				if (tl==0) break;
+				cout<<"\nChon loai du lieu can sap xep theo alphabet (1: ID, 2: Ten): ";
+                cin>>tl6;
+            	switch (tl6){
+            		case 1:
+            			switch (tl){
+            				case 1: l1.sort("ID"); break;
+            				case 2: l2.sort("ID"); break;
+            				case 3: l3.sort("ID"); break;
+						}
+						break;
+            		case 2:	
+            			switch (tl){
+            				case 1: l1.sort("name"); break;
+            				case 2: l2.sort("name"); break;
+            				case 3: l3.sort("name"); break;
+						}
+						break;
+				}
+            	break;
             case 5:
                 tl=selectOption();
                 int tl1;
@@ -189,7 +225,15 @@ int main(){
                         foundNode->data->Xuat();
                         system("pause");
                     } else cout << "Khong tim thay gia tri can tim\n";
-                break;	    
+                break;	
+            case 7:
+                tl=selectOption();
+                int tl1;
+                if (tl==1){
+                    cout<<"Chon kieu du lieu can thong ke: ";
+                    cin>>tl1;
+                }
+
 	}
         }
         }

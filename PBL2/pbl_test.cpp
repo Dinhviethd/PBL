@@ -8,7 +8,6 @@ class Entity{
     public:
         virtual void Nhap();
         virtual void Xuat();
-        // virtual void sapXep();
         virtual string getName() const;
         virtual string getID() const;
 };

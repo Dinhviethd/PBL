@@ -20,7 +20,9 @@ public:
     void deleteNode(string info, string _type);
     void undoDelete();
     bool search(string info,string _type, Node *&foundNode);
+    void sort(string _type);
     void output();
+    
 };
 LinkList::LinkList() {
     header = NULL;
@@ -53,7 +55,7 @@ void LinkList::insertNode(Entity *data) {
     Node* foundNode = NULL;
     if (search(data->getID(), "ID", foundNode)) {
         cout << "Phan tu voi ID '" << data->getID() << "' da ton tai trong danh sach. Khong them moi.\n";
-        getchar();
+        system("pause");
         return;  
     }
     Node *newNode = new Node();
@@ -141,6 +143,40 @@ void LinkList::undoDelete() {
         deleted->next->prev = deleted;
     }
     deleted = NULL;
+}
+
+void LinkList::sort(string _type) {
+    if (header == NULL || header->next == NULL) {
+        cout << "Danh sach trong hoac chi co 1 phan tu, khong can sap xep." << endl;
+        return;
+    }
+    
+    bool swapped;
+    do {
+        swapped = false;
+        Node *current = header;
+        
+        while (current->next != NULL) {
+            bool needSwap = false;
+
+            if (_type == "ID" && current->data->getID() > current->next->data->getID()) {
+                needSwap = true;
+            } else if (_type == "name" && current->data->getName() > current->next->data->getName()) {
+                needSwap = true;
+            }
+
+            if (needSwap) {
+                Entity *tempData = current->data;
+                current->data = current->next->data;
+                current->next->data = tempData;
+                swapped = true;
+            }
+            current = current->next;
+        }
+    } while (swapped);
+
+    cout << "Da sap xep theo yeu cau  ." << endl;
+    system("pause");
 }
 void LinkList::output() {
     if (header == NULL) {
