@@ -32,7 +32,9 @@ void Product::Nhap() {
 }
 void Product::Xuat() {
     Entity::Xuat();
-    cout << "\tSo Luong: " << sl << "\tDon vi: " << donVi << "\tDon gia: " << donGia << "\tID Kho: "<<kho->getID()<<endl;
+    cout << "\tSo Luong: " << sl << "\tDon vi: " << donVi << "\tDon gia: " << donGia;
+    if (kho) cout << "Thuoc kho: " << kho->getName() << " (ID: " << kho->getID() << ")" << endl;
+    else cout << "Chua duoc them vao kho." << endl;
 }
 void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
     string line, khoID;
@@ -71,8 +73,14 @@ float Product::TinhthanhTien(){
 int Product::getSL(){
     return sl;
 }
-void Product::themSPVaoKho(Kho *k){
-    kho=k;
+void Product::themSPVaoKho(Kho *k) {
+    if (k->getCurrentSize() + sl <= k->getCapacity()) {  
+        kho = k;
+        k->setCurrentSize(k->getCurrentSize() + sl);  
+        cout << "San pham da duoc them vao kho: " << k->getName() << endl;
+    } else {
+        cout << "Kho '" << k->getName() << "' khong du suc chua de them san pham nay!" << endl;
+    }
 }
 float Product::getDonGia(){
     return donGia;

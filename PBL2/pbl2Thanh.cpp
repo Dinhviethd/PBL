@@ -66,46 +66,52 @@ void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
     }
 
 }
-
-void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list) {
+Kho *chonKho(LinkList &l2, int sl) {
     string info;
-    if (tl == 0) return;
-    if (tl == 1) {
-        list = new Product;
-    } else if (tl == 2) {
-        list = new Kho;
-    } else if (tl == 3) {
-        list = new Manager;
-    } else {
-        cout << "Lua chon khong hop le!! Vui long nhap lai" << endl;
-        return;
-    }
-    list->Nhap();
-    if (tl == 1) {
-        l1.insertNode(list);
-        Product *newProduct= (Product*)list;
-        xuatThongTin(l1, l2, l3, 2);
-        cout << "Vui long nhap ID kho chua san pham: ";
-        cin >> info; 
+    while (true) {
+        cout << "Nhap ID kho chua san pham: ";
+        cin >> info;
         Node *foundNode = nullptr;
         if (l2.search(info, "ID", foundNode)) {
-            Kho *selectedKho = (Kho*)foundNode->data;  
-            if (selectedKho) {
-                newProduct->themSPVaoKho(selectedKho);  
-                cout << "Da them san pham vao kho: " << selectedKho->getName() << endl;
+            Kho *selectedKho = (Kho *)foundNode->data;
+            if (selectedKho->getCurrentSize() + sl <= selectedKho->getCapacity()) {
+                cout << "Da chon kho: " << selectedKho->getName() << endl;
+                return selectedKho;
             } else {
-                cout << "Khong tim thay kho phu hop!" << endl;
+                cout << "Kho '" << selectedKho->getName() << "' khong du suc chua. Vui long chon kho khac." << endl;
             }
         } else {
-            cout << "Khong tim thay kho phu hop!" << endl;
+            cout << "Khong tim thay kho voi ID nay. Vui long nhap lai!" << endl;
         }
-    } else if (tl == 2) {
-        l2.insertNode(list);
-    } else if (tl == 3) {
-        l3.insertNode(list);
     }
 }
+void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list) {
+    if (tl == 0) return;
 
+    if (tl == 1) {
+        list = new Product;
+        list->Nhap();  // Nhập thông tin sản phẩm.
+        l1.insertNode(list);
+
+        Product *newProduct = (Product *)list;
+        xuatThongTin(l1, l2, l3, 2); 
+        Kho *selectedKho = chonKho(l2, newProduct->getSL());  // Chọn kho và kiểm tra sức chứa.
+
+        if (selectedKho) {
+            newProduct->themSPVaoKho(selectedKho);
+        }
+    } else if (tl == 2) {
+        list = new Kho;
+        list->Nhap();
+        l2.insertNode(list);
+    } else if (tl == 3) {
+        list = new Manager;
+        list->Nhap();
+        l3.insertNode(list);
+    } else {
+        cout << "Lua chon khong hop le!! Vui long nhap lai." << endl;
+    }
+}
 int selectOption(){
     int tl;
     cout << "1. Hang hoa" << endl;

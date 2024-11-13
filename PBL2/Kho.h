@@ -17,6 +17,9 @@ public:
     void Xuat();
     void docFile(ifstream &f,multimap<string, Manager*>& managers);
     void addManager(Manager *qly);
+    int getCurrentSize();
+    void setCurrentSize(int size);
+    int getCapacity();
 };
 void Kho::Nhap() {
     Entity::Nhap();
@@ -25,7 +28,10 @@ void Kho::Nhap() {
 }
 void Kho::Xuat() {
     Entity::Xuat();
-    cout<<"   Suc chua: "<< capacity<< "   ID quan li: "<<qli->getID()<< " Ten quan li: "<<qli->getName()<<endl;
+    cout << "   Suc chua: " << capacity;
+    if (qli) 
+    cout << "   ID quan li: " << qli->getID() << " Ten quan li: " << qli->getName()<<endl;
+    else cout << "   Chua co quan li."<<endl;
 }
 void Kho::docFile(ifstream &file, multimap<string, Manager*>& managers){
     string line, managerID;
@@ -46,5 +52,14 @@ void Kho::docFile(ifstream &file, multimap<string, Manager*>& managers){
 }}
 void Kho::addManager(Manager *qly){
     qli=qly;
+}
+int Kho::getCapacity(){
+    return capacity;
+}
+int Kho::getCurrentSize(){
+    return current_size;
+}
+void Kho::setCurrentSize(int size) {
+    current_size = size;
 }
 #endif
