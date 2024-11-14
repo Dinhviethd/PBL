@@ -35,8 +35,9 @@ void Kho::Xuat() {
     // else cout << "   Chua co quan li."<<endl;
     cout << " | " << setw(11) << left << capacity
          << " | " << setw(14) << left << current_size;
-    if (qli) cout << " | " << setw(19) << left << qli->getName()
-             << " | " << setw(13) << left << qli->getID() << " |\n";
+    if (qli) cout<< " | " << setw(13) << left << qli->getID() << " | " << setw(19) << left << qli->getName()<< " |\n";
+             
+    else cout << " | " << setw(11) << left << "Chua co quan li!";
 }
 void Kho::docFile(ifstream &file, multimap<string, Manager*>& managers){
     string line, managerID;

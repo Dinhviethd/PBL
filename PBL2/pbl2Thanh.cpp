@@ -155,7 +155,7 @@ void print(int tl){
             break;
         case 2:
             cout << "+--------------+-------------------------------+-------------+----------------+---------------------+---------------+\n";
-            cout << "| Ma kho       | Ten kho                       | Suc chua    | SL hien tai    | Ten quan li         | ID quan li    |\n";  
+            cout << "| Ma kho       | Ten kho                       | Suc chua    | SL hien tai    | ID quan li| Ten quan li         |\n";  
             cout << "+--------------+-------------------------------+-------------+----------------+---------------------+---------------+\n";
         case 3:
             cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
@@ -277,6 +277,8 @@ int main(){
                 else if (tl==3) {l3.output();}
                 else {cout<<"Sai loai thong tin. Vui long nhap lai"<<endl; break;}
                 xoaThongTin(l1,l2,l3, tl);	
+                cout<<"Xoa thong tin thanh cong!\n";
+                system("pause");
 				break;
 			case 4: 
                 tl=selectOption();
@@ -284,7 +286,8 @@ int main(){
                 else if (tl==1) l1.undoDelete();
                 else if (tl==2) l2.undoDelete();
                 else if (tl==3) l3.undoDelete();
-                cout<<"Khoi phuc thong tin thanh cong!!";
+                cout<<"Khoi phuc thong tin thanh cong!!\n";
+                system("pause");
 				break;	
             case 6:
             	tl=selectOption();

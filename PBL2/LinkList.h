@@ -20,7 +20,6 @@ public:
     return header;
 }
     void insertNode(Entity *data);
-    void insertNode1(Entity *data, int viTri);
     void deleteNode(string info, string _type);
     void undoDelete();
     bool search(string info,string _type, Node *&foundNode);
@@ -83,31 +82,6 @@ int count(Node *head){
         head=head->next;
     }
     return cnt;
-}
-void LinkList::insertNode1(Entity *data, int position){
-    int cnt= count(header);
-    Node *newNode = new Node();
-    newNode->data=data;
-    newNode->next = NULL;
-    newNode->prev = NULL;
-    if (position == 1) {
-        newNode->next = header;
-        if (header != nullptr) {
-            header->prev = newNode;
-        }
-        header = newNode;
-        return;
-    }
-    Node *temp = header;
-    for (int i = 1; i < position - 1; i++) {
-        temp = temp->next;
-    }
-    newNode->next = temp->next;
-    newNode->prev = temp;
-    if (temp->next != NULL) {
-        temp->next->prev = newNode;
-    }
-    temp->next = newNode;
 }
 void LinkList::deleteNode(string info, string _type) {
     if (header == NULL) {
@@ -191,8 +165,6 @@ void LinkList::output() {
     while (temp != NULL) {
         temp->data->Xuat();
         temp = temp->next;
-        
-
     }
 }
 
