@@ -15,6 +15,9 @@ class LinkList {
 public:
     LinkList();
     ~LinkList();
+    Node* getHeader() const {
+    return header;
+}
     void insertNode(Entity *data);
     void insertNode1(Entity *data, int viTri);
     void deleteNode(string info, string _type);

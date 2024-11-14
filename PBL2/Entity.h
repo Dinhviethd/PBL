@@ -4,6 +4,7 @@
 #include <sstream>
 #include <fstream>
 #include <cstring>
+
 using namespace std;
 class Entity {
 protected:
@@ -14,6 +15,7 @@ public:
     virtual void Xuat()=0;
     virtual string getName() const;
     virtual string getID() const;
+  
 };
 void Entity::Nhap() {
     cout << "Nhap ID: "; 

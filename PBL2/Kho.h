@@ -29,6 +29,7 @@ void Kho::Nhap() {
 void Kho::Xuat() {
     Entity::Xuat();
     cout << "   Suc chua: " << capacity;
+    cout << "   Suc chua hien tai" << current_size;
     if (qli) 
     cout << "   ID quan li: " << qli->getID() << " Ten quan li: " << qli->getName()<<endl;
     else cout << "   Chua co quan li."<<endl;

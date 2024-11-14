@@ -116,7 +116,14 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
         else {
         cout << "Lua chon khong hop le!! Vui long nhap lai." << endl;
     }
-    } else if (tl == 3) {
+    }
+    else if (tl == 2){
+        list = new Kho;
+        list->Nhap();
+        l2.insertNode(list);
+
+    }
+    else if (tl == 3) {
         list = new Manager;
         list->Nhap();  // Nhập thông tin quản lý
         l3.insertNode(list);
@@ -139,6 +146,54 @@ int selectOption(){
     cin >> tl;
     return tl;
 }
+void printStatistics(LinkList &list) {
+    double totalPrice = 0;
+    int totalAmount = 0;
+    struct TypeStats {
+        char loaiVatTu[100];
+        int soLuong;
+        double thanhTien;
+    };
+
+    TypeStats stats[100];
+    int typeCount = 0;
+
+    Node *temp = list.getHeader();;
+    while (temp != NULL) {
+        Product *product = dynamic_cast<Product*>(temp->data);
+        if (product) {  // Check if the cast was successful
+            totalPrice += product->getThanhTien();
+            totalAmount += product->getSL();
+
+            bool found = false;
+            for (int i = 0; i < typeCount; i++) {
+                if (strcmp(stats[i].loaiVatTu, product->getLoai().c_str()) == 0) {
+                    stats[i].soLuong += product->getSL();
+                    stats[i].thanhTien += product->getThanhTien();
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                strcpy(stats[typeCount].loaiVatTu, product->getLoai().c_str());
+                stats[typeCount].soLuong = product->getSL();
+                stats[typeCount].thanhTien = product->getThanhTien();
+                typeCount++;
+            }
+        }
+        temp = temp->next;
+    }
+
+    cout << "Tong so luong: " << totalAmount << endl;
+    cout << "Tong thanh tien: " << totalPrice << endl;
+    cout << "Thong ke theo loai vat tu:" << endl;
+    for (int i = 0; i < typeCount; i++) {
+        cout << "Loai vat tu: " << stats[i].loaiVatTu
+             << ", So luong: " << stats[i].soLuong
+             << ", Thanh tien: " << stats[i].thanhTien << endl;
+    }
+}
+
 int main(){
     LinkList l1,l2,l3;
     Entity *list;
@@ -160,8 +215,10 @@ int main(){
         cout << "Password: ";
         cin >> password;
         if (username == "admin" && password == "12345" ) {
+        system("cls");
         cout << "Chao mung " << username << endl;
 		while (1){
+        
           cout << "===== MENU  =====\n";
           cout << "1. Them thong tin\n";
           cout << "2. Xem thong tin\n";
@@ -169,7 +226,7 @@ int main(){
           cout << "4. Khoi phuc thong tin vua xoa\n";
           cout << "5. Tim kiem thong tin (theo ID/Ten)\n";
           cout << "6. Sap xep theo ID/Ten\n";
-          cout<< "7. Thong ke thong tin vat tu\n";
+          cout<<  "7. Thong ke thong tin hang\n";
           cout << "0. Dang Xuat\n";
           cout << "========================\n";
           cout << "Chon: ";
@@ -232,6 +289,10 @@ int main(){
 						break;
 				}
             	break;
+            case 7: 
+                printStatistics(l1);
+                system("pause");
+                break;
             case 5:
                 tl=selectOption();
                 int tl1;
@@ -260,13 +321,7 @@ int main(){
                         system("pause");
                     } else cout << "Khong tim thay gia tri can tim\n";
                 break;	
-            // case 7: (cha biet sao nhap xuong duoi nay thi code k chay duoc nen t tam de option len ke cuoi, tam thoi bo qua cai nay)
-            //     tl=selectOption();
-            //     int tl1;
-            //     if (tl==1){
-            //         cout<<"Chon kieu du lieu can thong ke: ";
-            //         cin>>tl1;
-            //     }
+
 
 	}
         }

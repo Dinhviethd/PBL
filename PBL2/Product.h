@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Entity.h"
 #include "Kho.h"
+#include "LinkList.h"
 #include <cstring>
 #include <map>
 using namespace std;
@@ -12,15 +13,17 @@ class Product : public Entity {
 protected:
     string loai, donVi;
     int sl;
-    float donGia;
+    double donGia, thanhTien;
     Kho *kho= nullptr;
 public:
     void Nhap();
     void Xuat();
     void docFile(ifstream &file, multimap<string, Kho*>& _kho);
-    float TinhthanhTien();
+    double TinhthanhTien();
+    string getLoai();
+    double getThanhTien();
     int getSL();
-    float getDonGia();
+    double getDonGia();
     void themSPVaoKho(Kho *k);
 };
 void Product::Nhap() {
@@ -56,9 +59,16 @@ void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
         if (range.first != range.second) {
             kho = range.first->second; 
         }
+        thanhTien =TinhthanhTien();
     }
 }
-float Product::TinhthanhTien(){
+string Product::getLoai(){
+    return loai;
+}
+double Product::getThanhTien(){
+    return thanhTien;
+}
+double Product::TinhthanhTien(){
     float thanhTien=0;
     if (sl>200)
         thanhTien= sl*donGia*1.15;
@@ -82,7 +92,8 @@ void Product::themSPVaoKho(Kho *k) {
         cout << "Kho '" << k->getName() << "' khong du suc chua de them san pham nay!" << endl;
     }
 }
-float Product::getDonGia(){
+double Product::getDonGia(){
     return donGia;
 }
+
 #endif
