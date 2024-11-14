@@ -28,11 +28,15 @@ void Kho::Nhap() {
 }
 void Kho::Xuat() {
     Entity::Xuat();
-    cout << "   Suc chua: " << capacity;
-    cout << "   Suc chua hien tai" << current_size;
-    if (qli) 
-    cout << "   ID quan li: " << qli->getID() << " Ten quan li: " << qli->getName()<<endl;
-    else cout << "   Chua co quan li."<<endl;
+    // cout << "   Suc chua: " << capacity;
+    // cout << "   Suc chua hien tai" << current_size;
+    // if (qli) 
+    // cout << "   ID quan li: " << qli->getID() << " Ten quan li: " << qli->getName()<<endl;
+    // else cout << "   Chua co quan li."<<endl;
+    cout << " | " << setw(11) << left << capacity
+         << " | " << setw(14) << left << current_size;
+    if (qli) cout << " | " << setw(19) << left << qli->getName()
+             << " | " << setw(13) << left << qli->getID() << " |\n";
 }
 void Kho::docFile(ifstream &file, multimap<string, Manager*>& managers){
     string line, managerID;

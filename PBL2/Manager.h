@@ -39,6 +39,8 @@ void Manager::Nhap() {
 }
 void Manager::Xuat() {
     Entity::Xuat();
-    cout << "\tGioi tinh: " << gender << "\tNam sinh: " << birth << "\tDia chi: " << mAdr << endl;
+    cout << " | " << setw(11) << left << gender
+         << " | " << setw(9) << left << birth
+         << " | " << setw(15) << left << mAdr << " |\n";
 }
 #endif

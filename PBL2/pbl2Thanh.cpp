@@ -121,7 +121,7 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
         list = new Kho;
         list->Nhap();
         l2.insertNode(list);
-        
+
     }
     else if (tl == 3) {
         list = new Manager;
@@ -154,7 +154,13 @@ void print(int tl){
             cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+-------------+-------------+\n";
             break;
         case 2:
+            cout << "+--------------+-------------------------------+-------------+----------------+---------------------+---------------+\n";
+            cout << "| Ma kho       | Ten kho                       | Suc chua    | SL hien tai    | Ten quan li         | ID quan li    |\n";  
+            cout << "+--------------+-------------------------------+-------------+----------------+---------------------+---------------+\n";
         case 3:
+            cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
+            cout << "| Ma kho       | Ten kho                       | Gioi tinh   | Nam sinh  | Dia chi         |\n";  
+            cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
         break;
 
     }
@@ -255,8 +261,9 @@ int main(){
           	case 2:
 			  	cout << "Moi ban nhap thong tin can xem: " << endl;
                 tl=selectOption();
+                print(tl);
                 if (tl==0) break;
-                else if (tl==1) {print(tl);l1.output();system("pause");}
+                else if (tl==1) {l1.output();system("pause");}
                 else if (tl==2) {l2.output(); system("pause");}
                 else if (tl==3) {l3.output(); system("pause");}
                 else cout<<"Sai loai thong tin. Vui long nhap lai"<<endl;
