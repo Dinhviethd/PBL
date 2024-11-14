@@ -121,7 +121,7 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
         list = new Kho;
         list->Nhap();
         l2.insertNode(list);
-
+        
     }
     else if (tl == 3) {
         list = new Manager;
@@ -145,6 +145,19 @@ int selectOption(){
     cout << "0. Thoat"<<endl;
     cin >> tl;
     return tl;
+}
+void print(int tl){
+    switch (tl){
+        case 1:
+            cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+-------------+-------------+\n";
+            cout << "| Ma hang      | Ten hang                      | Loai           | DVT            | SL     | Don gia    | Thanh tien  |Thuoc Kho    | ID Kho	 |\n";  
+            cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+-------------+-------------+\n";
+            break;
+        case 2:
+        case 3:
+        break;
+
+    }
 }
 void printStatistics(LinkList &list) {
     double totalPrice = 0;
@@ -234,7 +247,6 @@ int main(){
           switch (choice){
           	case 0: goto loginUI;
           	case 1:
-            cout << "Chon kieu thong tin muon nhap: ";
           		cout << "Moi ban nhap thong tin can them: " << endl;
                 tl=selectOption();
                 nhapBanPhim(l1, l2, l3, tl, list);
@@ -244,7 +256,7 @@ int main(){
 			  	cout << "Moi ban nhap thong tin can xem: " << endl;
                 tl=selectOption();
                 if (tl==0) break;
-                else if (tl==1) {l1.output();system("pause");}
+                else if (tl==1) {print(tl);l1.output();system("pause");}
                 else if (tl==2) {l2.output(); system("pause");}
                 else if (tl==3) {l3.output(); system("pause");}
                 else cout<<"Sai loai thong tin. Vui long nhap lai"<<endl;

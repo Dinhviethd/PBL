@@ -28,6 +28,7 @@ public:
 };
 void Product::Nhap() {
     Entity::Nhap();
+    cout << "Nhap loai hang"; cin >> loai;
     cout << "Nhap so luong sp: "; cin >> sl;
     cout << "Nhap don gia san pham: "; cin >> donGia;
     cout << "Nhap don vi: "; 
@@ -35,9 +36,22 @@ void Product::Nhap() {
 }
 void Product::Xuat() {
     Entity::Xuat();
-    cout << "\tSo Luong: " << sl << "\tDon vi: " << donVi << "\tDon gia: " << donGia;
-    if (kho) cout << "   Thuoc kho: " << kho->getName() << " (ID: " << kho->getID() << ")" << endl;
-    else cout << "Chua duoc them vao kho." << endl;
+    // cout << "\tSo Luong: " << sl << "\tDon vi: " << donVi << "\tDon gia: " << donGia;
+    // if (kho) cout << "   Thuoc kho: " << kho->getName() << " (ID: " << kho->getID() << ")" << endl;
+    // else cout << "Chua duoc them vao kho." << endl;
+    cout << " | " << setw(14) << left << loai
+         << " | " << setw(14) << left << donVi
+         << " | " << setw(6) << left << sl
+         << " | " << setw(10) << left << fixed << setprecision(2) << donGia
+         << " | " << setw(11) << left << thanhTien;
+
+    if (kho) {
+        cout << " | " << setw(11) << left << kho->getName()
+             << " | " << setw(11) << left << kho->getID() << " |" << endl;
+    } else {
+        cout << " | " << setw(11) << left << "N/A"
+             << " | " << setw(11) << left << "N/A" << " |" << endl;
+    }
 }
 void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
     string line, khoID;

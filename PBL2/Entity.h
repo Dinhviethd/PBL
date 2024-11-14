@@ -4,7 +4,7 @@
 #include <sstream>
 #include <fstream>
 #include <cstring>
-
+#include <iomanip>
 using namespace std;
 class Entity {
 protected:
@@ -24,7 +24,9 @@ void Entity::Nhap() {
     getline(cin >> ws, name);  
 }
 void Entity::Xuat() {
-    cout << "ID: " << ID << "\tTen: " << name;
+    //cout << "ID: " << ID << "\tTen: " << name;
+    cout << "| " << setw(12) << left << ID
+         << " | " << setw(29) << left << name;
 }
 string Entity::getName() const {
     return name;

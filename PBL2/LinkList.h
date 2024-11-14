@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Entity.h"
 #include <cstring>
+#include <iomanip>
 using namespace std;
 struct Node {
         Entity *data;
@@ -190,6 +191,8 @@ void LinkList::output() {
     while (temp != NULL) {
         temp->data->Xuat();
         temp = temp->next;
+        
+
     }
 }
 
