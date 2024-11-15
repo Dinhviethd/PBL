@@ -18,6 +18,7 @@ public:
     virtual void Xuat()=0;
     virtual string getName() const;
     virtual string getID() const;
+    virtual void setID();
     virtual void chinhSuaThongTin();
 };
 Entity::Entity(){
@@ -31,13 +32,10 @@ Entity::~Entity(){
 
 }
 void Entity::Nhap() {
-    cout << "Nhap ID: "; 
-    getline(cin >> ws, ID);  
     cout << "Nhap ten: "; 
     getline(cin >> ws, name);  
 }
 void Entity::Xuat() {
-    //cout << "ID: " << ID << "\tTen: " << name;
     cout << "| " << setw(12) << left << ID
          << " | " << setw(29) << left << name;
 }
@@ -48,6 +46,9 @@ string Entity::getID() const {
     return ID;
 }
 void Entity::chinhSuaThongTin(){
-    
+}
+void Entity::setID(){
+    cout << "Nhap ID: "; 
+    getline(cin >> ws, ID);  
 }
 #endif

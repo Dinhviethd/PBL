@@ -27,15 +27,15 @@ public:
     double getDonGia();
     void themSPVaoKho(Kho *k);
     void chinhSuaThongTin();
-
 };
 void Product::Nhap() {
     Entity::Nhap();
-    cout << "Nhap loai hang: "; cin >> loai;
-    cout << "Nhap so luong sp: "; cin >> sl;
-    cout << "Nhap don gia san pham: "; cin >> donGia;
+    cout << "Nhap loai hang: "; getline(cin, loai);
     cout << "Nhap don vi: "; 
     getline(cin >> ws, donVi);  
+    cout << "Nhap so luong sp: "; cin >> sl; cin.ignore(); 
+    cout << "Nhap don gia san pham: "; cin >> donGia;
+   
 }
 void Product::Xuat() {
     Entity::Xuat();

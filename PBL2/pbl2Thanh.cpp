@@ -10,7 +10,7 @@
 #include <conio.h>
 using namespace std;
 void print(int tl);
-void xuatThongTin(LinkList l1, LinkList l2, LinkList l3, int tl){
+void xuatThongTin(LinkList &l1, LinkList &l2, LinkList &l3, int tl){
     print(tl);
     if (tl==0) return;
     else if (tl==1) {l1.output();}
@@ -109,10 +109,12 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
 
     if (tl == 1) {
         list = new Product;
+        list->setID();
+        if (!l1.checkDuplicate(list)){
         list->Nhap();  // Nhập thông tin sản phẩm.
         l1.insertNode(list);
         Product *newProduct = (Product *)list;
-        xuatThongTin(l1, l2, l3, 2); // Hiển thị danh sách kho
+        xuatThongTin(l1,l2,l3,2);
         Kho *selectedKho = chonKho(l2, newProduct->getSL());  // Chọn kho và kiểm tra sức chứa
         if (selectedKho) {
             newProduct->themSPVaoKho(selectedKho);
@@ -120,29 +122,34 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
         else {
         cout << "Lua chon khong hop le!! Vui long nhap lai." << endl;
     }
-    }
+    }}
     else if (tl == 2){
         list = new Kho;
+        list->setID();
+        if (!l2.checkDuplicate(list)){
         list->Nhap();
         l2.insertNode(list);
-
-    }
+    }}
     else if (tl == 3) {
         list = new Manager;
+        list->setID();
+        if (!l3.checkDuplicate(list)){
         list->Nhap();  // Nhập thông tin quản lý
         l3.insertNode(list);
         Manager *newManager = (Manager *)list;
-        xuatThongTin(l1, l2, l3, 2);  // Hiển thị danh sách kho
+        print(tl);
+        l2.output();
         Kho *selectedKho = chonKhoDeQuanLy(l2);  // Chọn kho để quản lý
         if (selectedKho) {
             selectedKho->addManager(newManager);  // Gán quản lý cho kho
         }
     } else {
         cout << "Lua chon khong hop le!! Vui long nhap lai." << endl;
-    }
+    }}
 }
 int selectOption(){
     int tl;
+    cout << "Chon du lieu ban muon truy van: " << endl;
     cout << "1. Hang hoa" << endl;
     cout << "2. Kho" << endl;
     cout << "3. Nguoi quan ly" << endl;
@@ -384,6 +391,7 @@ int main(){
                         foundNode->data->Xuat();
                         system("pause");
                     } else cout << "Khong tim thay gia tri can tim\n";
+                system("pause");
                 break;	
 
 
