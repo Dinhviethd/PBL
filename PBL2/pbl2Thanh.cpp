@@ -144,6 +144,7 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
 }
 int selectOption(){
     int tl;
+    cout << "Chon du lieu ban muon truy van: " << endl;
     cout << "1. Hang hoa" << endl;
     cout << "2. Kho" << endl;
     cout << "3. Nguoi quan ly" << endl;
@@ -385,6 +386,7 @@ int main(){
                         foundNode->data->Xuat();
                         system("pause");
                     } else cout << "Khong tim thay gia tri can tim\n";
+                system("pause");
                 break;	
 
 
