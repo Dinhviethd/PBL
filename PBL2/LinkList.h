@@ -22,6 +22,15 @@ public:
     void insertNode(Entity *data);
     void deleteNode(string info, string _type);
     void undoDelete();
+    Entity *operator[](int index)    {
+
+        Node *temp = getHeader();
+        for (int i = 0; i < index; i++)
+        {
+            temp = temp->next;
+        }
+        return temp->data;
+    };
     bool search(string info,string _type, Node *&foundNode);
     void sort(string _type);
     void output();
@@ -31,6 +40,7 @@ LinkList::LinkList() {
     header = NULL;
     deleted = NULL;
 }
+
 LinkList::~LinkList() {
     Node *temp = header;
     while (temp != NULL) {

@@ -8,7 +8,9 @@
 #include "LinkList.h"
 #include "Kho.h"
 using namespace std;
+void print(int tl);
 void xuatThongTin(LinkList l1, LinkList l2, LinkList l3, int tl){
+    print(tl);
     if (tl==0) return;
     else if (tl==1) {l1.output();system("pause");}
     else if (tl==2) {l2.output(); system("pause");}
@@ -66,6 +68,7 @@ void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
     }
 
 }
+
 Kho *chonKho(LinkList &l2, int sl) {
     string info;
     while (true) {
@@ -155,13 +158,14 @@ void print(int tl){
             break;
         case 2:
             cout << "+--------------+-------------------------------+-------------+----------------+---------------------+---------------+\n";
-            cout << "| Ma kho       | Ten kho                       | Suc chua    | SL hien tai    | ID quan li| Ten quan li         |\n";  
+            cout << "| Ma kho       | Ten kho                       | Suc chua    | SL hien tai    | ID quan li    | Ten quan li         |\n";  
             cout << "+--------------+-------------------------------+-------------+----------------+---------------------+---------------+\n";
+            break;
         case 3:
             cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
             cout << "| Ma kho       | Ten kho                       | Gioi tinh   | Nam sinh  | Dia chi         |\n";  
             cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
-        break;
+            break;
 
     }
 }
@@ -203,14 +207,22 @@ void printStatistics(LinkList &list) {
         temp = temp->next;
     }
 
-    cout << "Tong so luong: " << totalAmount << endl;
-    cout << "Tong thanh tien: " << totalPrice << endl;
-    cout << "Thong ke theo loai vat tu:" << endl;
+    cout << "+---------------------+------------+-------------+\n";
+    cout << "| Loai hang           | So Luong   | Thanh Tien  |\n";
+    cout << "+---------------------+------------+-------------+\n";
     for (int i = 0; i < typeCount; i++) {
-        cout << "Loai vat tu: " << stats[i].loaiVatTu
-             << ", So luong: " << stats[i].soLuong
-             << ", Thanh tien: " << stats[i].thanhTien << endl;
+        cout << "| " << setw(20) << left << stats[i].loaiVatTu
+             << "|  " << setw(10) << stats[i].soLuong
+             << "| " << setw(12) << fixed << setprecision(2) << stats[i].thanhTien
+             << "|\n";
     }
+    cout << "+---------------------+------------+-------------+\n";
+
+    // Display the totals
+    cout << "| Tong cong           |  " << setw(10) << totalAmount
+         << "|  " << setw(11) << fixed << setprecision(2) << totalPrice
+         << "|\n";
+    cout << "+---------------------+------------+-------------+\n";
 }
 
 int main(){
@@ -234,10 +246,10 @@ int main(){
         cout << "Password: ";
         cin >> password;
         if (username == "admin" && password == "12345" ) {
+        
+		while (1){
         system("cls");
         cout << "Chao mung " << username << endl;
-		while (1){
-        
           cout << "===== MENU  =====\n";
           cout << "1. Them thong tin\n";
           cout << "2. Xem thong tin\n";
@@ -271,6 +283,7 @@ int main(){
 			case 3: 
                 cout<<"Moi ban nhap thong tin can xoa: "<<endl;
                 tl=selectOption();
+                if (tl) print(tl);
                 if (tl==0) break;
                 else if (tl==1) {l1.output();}
                 else if (tl==2) {l2.output();}
@@ -339,6 +352,7 @@ int main(){
                     else cout<<"Kieu du lieu can tim kiem khong hop le"<<endl;
                     if (found) {
                         cout << "Tim thay phan tu can tim:\n";
+                        print(tl);
                         foundNode->data->Xuat();
                         system("pause");
                     } else cout << "Khong tim thay gia tri can tim\n";

@@ -19,6 +19,7 @@ public:
     void Nhap();
     void Xuat();
     void docFile(ifstream &file, multimap<string, Kho*>& _kho);
+    void xuatFile(ofstream &file);
     double TinhthanhTien();
     string getLoai();
     double getThanhTien();
@@ -72,6 +73,21 @@ void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
         }
         kho->setCurrentSize(kho->getCurrentSize()+sl);
         thanhTien =TinhthanhTien();
+    }
+}
+void Product::xuatFile(ofstream &file) {
+    cout << "ID|Name|loai|DVT|SL|DonGia|IDKho" << endl;
+    if (file.is_open()) {
+        file << ID << "|" << name << "|" << loai << "|" << donVi << "|"
+             << sl << "|" << fixed << setprecision(2) << donGia << "|";
+        if (kho) {
+            file << kho->getID();
+        } else {
+            file << "N/A";  
+        }
+        file << endl;
+    } else {
+        cerr << "Error: Could not open file for writing." << endl;
     }
 }
 string Product::getLoai(){
