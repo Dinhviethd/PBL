@@ -106,7 +106,6 @@ Kho *chonKhoDeQuanLy(LinkList &l2) {
 }
 void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list) {
     if (tl == 0) return;
-
     if (tl == 1) {
         list = new Product;
         list->setID();
