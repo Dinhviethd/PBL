@@ -26,6 +26,8 @@ public:
     int getSL();
     double getDonGia();
     void themSPVaoKho(Kho *k);
+    void chinhSuaThongTin();
+
 };
 void Product::Nhap() {
     Entity::Nhap();
@@ -122,6 +124,52 @@ void Product::themSPVaoKho(Kho *k) {
 }
 double Product::getDonGia(){
     return donGia;
+}
+void Product::chinhSuaThongTin() {
+    int choice;
+    cout << "Chon thong tin ban muon sua:" << endl;
+    cout << "1. ID" << endl;
+    cout << "2. Ten" << endl;
+    cout << "3. Loai hang" << endl;
+    cout << "4. Don vi tinh (DVT)" << endl;
+    cout << "5. So luong" << endl;
+    cout << "6. Don gia" << endl;
+    cout << "Lua chon cua ban: ";
+    cin >> choice;
+    cin.ignore();
+
+    switch (choice) {
+        case 1:
+            cout << "Nhap ID moi (hien tai: " << ID << "): ";
+            getline(cin, ID); 
+            break;
+        case 2:
+            cout << "Nhap ten moi (hien tai: " << name << "): ";
+            getline(cin, name); 
+            break;
+        case 3:
+            cout << "Nhap loai hang moi (hien tai: " << loai << "): ";
+            getline(cin, loai); 
+            break;
+        case 4:
+            cout << "Nhap don vi tinh moi (hien tai: " << donVi << "): ";
+            getline(cin, donVi); 
+            break;
+        case 5:
+            cout << "Nhap so luong moi (hien tai: " << sl << "): ";
+            cin >> sl; 
+            cin.ignore(); 
+            break;
+        case 6:
+            cout << "Nhap don gia moi (hien tai: " << donGia << "): ";
+            cin >> donGia;
+            cin.ignore(); 
+            break;
+        
+        default:
+            cout << "Lua chon khong hop le." << endl;
+            break;
+    }
 }
 
 #endif

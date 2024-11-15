@@ -7,14 +7,15 @@
 #include "Entity.h"
 #include "LinkList.h"
 #include "Kho.h"
+#include <conio.h>
 using namespace std;
 void print(int tl);
 void xuatThongTin(LinkList l1, LinkList l2, LinkList l3, int tl){
     print(tl);
     if (tl==0) return;
-    else if (tl==1) {l1.output();system("pause");}
-    else if (tl==2) {l2.output(); system("pause");}
-    else if (tl==3) {l3.output(); system("pause");}
+    else if (tl==1) {l1.output();}
+    else if (tl==2) {l2.output(); }
+    else if (tl==3) {l3.output();}
     else cout<<"Sai loai thong tin. Vui long nhap lai"<<endl;
 }
 void xoaThongTin(LinkList &l1, LinkList &l2, LinkList &l3, int tl){
@@ -258,6 +259,7 @@ int main(){
           cout << "5. Tim kiem thong tin (theo ID/Ten)\n";
           cout << "6. Sap xep theo ID/Ten\n";
           cout<<  "7. Thong ke thong tin hang\n";
+          cout<<  "8. Chinh sua thong tin\n";
           cout << "0. Dang Xuat\n";
           cout << "========================\n";
           cout << "Chon: ";
@@ -324,10 +326,36 @@ int main(){
 						break;
 				}
             	break;
+            
             case 7: 
                 printStatistics(l1);
                 system("pause");
                 break;
+            case 8:
+                int index;
+                tl=selectOption();
+                print(tl);
+                if (tl==0) break;
+                else if (tl==1) {l1.output();}
+                else if (tl==2) {l2.output(); }
+                else if (tl==3) {l3.output(); }
+                 cout << "Chon chi so (STT) cua thong tin cua de chinh sua: ";
+                 cin >> index;
+                 index--;
+                 switch (tl){
+                    case 1:
+                        l1[index]->chinhSuaThongTin();
+                        break;
+                    case 2:
+                        l2[index]->chinhSuaThongTin();
+                        break;
+                    case 3:
+                        l3[index]->chinhSuaThongTin();
+                        break;
+                 }
+                 cout << "Da sua thong tin theo yeu cau!\n";
+                 system("pause");
+                 break;
             case 5:
                 tl=selectOption();
                 int tl1;

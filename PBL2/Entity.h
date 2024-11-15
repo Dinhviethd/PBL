@@ -11,12 +11,25 @@ protected:
     string ID;
     string name;
 public:
+    Entity();
+    Entity(string ID, string name);
+    virtual ~Entity();
     virtual void Nhap();
     virtual void Xuat()=0;
     virtual string getName() const;
     virtual string getID() const;
-  
+    virtual void chinhSuaThongTin();
 };
+Entity::Entity(){
+    ID = "";
+    name = "";
+}
+Entity::Entity(string ID, string name) : ID (ID), name(name){
+
+}
+Entity::~Entity(){
+
+}
 void Entity::Nhap() {
     cout << "Nhap ID: "; 
     getline(cin >> ws, ID);  
@@ -33,5 +46,8 @@ string Entity::getName() const {
 }
 string Entity::getID() const {
     return ID;
+}
+void Entity::chinhSuaThongTin(){
+    
 }
 #endif

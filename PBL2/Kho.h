@@ -20,6 +20,7 @@ public:
     int getCurrentSize();
     void setCurrentSize(int size);
     int getCapacity();
+    void chinhSuaThongTin();
 };
 void Kho::Nhap() {
     Entity::Nhap();
@@ -28,11 +29,7 @@ void Kho::Nhap() {
 }
 void Kho::Xuat() {
     Entity::Xuat();
-    // cout << "   Suc chua: " << capacity;
-    // cout << "   Suc chua hien tai" << current_size;
-    // if (qli) 
-    // cout << "   ID quan li: " << qli->getID() << " Ten quan li: " << qli->getName()<<endl;
-    // else cout << "   Chua co quan li."<<endl;
+
     cout << " | " << setw(11) << left << capacity
          << " | " << setw(14) << left << current_size;
     if (qli) cout<< " | " << setw(13) << left << qli->getID() << " | " << setw(19) << left << qli->getName()<< " |\n";
@@ -68,4 +65,35 @@ int Kho::getCurrentSize(){
 void Kho::setCurrentSize(int size) {
     current_size = size;
 }
+void Kho::chinhSuaThongTin() {
+    int choice;
+    cout << "Chon thong tin ban muon sua:" << endl;
+    cout << "1. ID" << endl;
+    cout << "2. Ten kho" << endl;
+    cout << "3. Suc chua" << endl;
+    cout << "Lua chon cua ban: ";
+    cin >> choice;
+    cin.ignore();
+
+    switch (choice) {
+        case 1:
+            cout << "Nhap ID moi (hien tai: " << ID << "): ";
+            getline(cin, ID); 
+            break;
+        case 2:
+            cout << "Nhap ten kho moi (hien tai: " << name << "): ";
+            getline(cin, name); 
+            break;
+        case 3:
+            cout << "Nhap suc chua moi (hien tai: " << capacity << "): ";
+            cin >> capacity;
+            cin.ignore();
+            break;
+        
+        default:
+            cout << "Lua chon khong hop le." << endl;
+            break;
+    }
+}
+
 #endif

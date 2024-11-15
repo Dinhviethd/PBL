@@ -14,6 +14,7 @@ public:
     void Nhap();
     void Xuat();
     void docFile(ifstream &file);
+    void chinhSuaThongTin();
 };
 
 void Manager::docFile(ifstream &file){
@@ -43,4 +44,44 @@ void Manager::Xuat() {
          << " | " << setw(9) << left << birth
          << " | " << setw(15) << left << mAdr << " |\n";
 }
+void Manager::chinhSuaThongTin() {
+    int choice;
+    cout << "Chon thong tin ban muon sua:" << endl;
+    cout << "1. ID" << endl;
+    cout << "2. Ten" << endl;
+    cout << "3. Gioi tinh" << endl;
+    cout << "4. Nam sinh" << endl;
+    cout << "5. Dia chi" << endl;
+    cout << "Lua chon cua ban: ";
+    cin >> choice;
+    cin.ignore();
+
+    switch (choice) {
+        case 1:
+            cout << "Nhap ID moi (hien tai: " << ID << "): ";
+            getline(cin, ID); 
+            break;
+        case 2:
+            cout << "Nhap ten moi (hien tai: " << name << "): ";
+            getline(cin, name); 
+            break;
+        case 3:
+            cout << "Nhap gioi tinh moi (hien tai: " << gender << "): ";
+            getline(cin, gender); 
+            break;
+        case 4:
+            cout << "Nhap nam sinh moi (hien tai: " << birth << "): ";
+            cin >> birth; 
+            cin.ignore();
+            break;
+        case 5:
+            cout << "Nhap dia chi moi (hien tai: " << mAdr << "): ";
+            getline(cin, mAdr); 
+            break;
+        default:
+            cout << "Lua chon khong hop le." << endl;
+            break;
+    }
+}
+
 #endif
