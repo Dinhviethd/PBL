@@ -33,7 +33,7 @@ void Manager::docFile(ifstream &file){
 void Manager::Nhap() {
     Entity::Nhap();
     cout << "Nhap gioi tinh: "; 
-    cin>>gender; 
+    getline(cin>>ws,gender);
     cout << "Nhap nam sinh: "; cin >> birth;
     cout << "Nhap dia chi quan li: "; 
     getline(cin >> ws, mAdr);  

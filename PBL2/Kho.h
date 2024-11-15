@@ -52,6 +52,9 @@ void Kho::docFile(ifstream &file, multimap<string, Manager*>& managers){
         if (managerRange.first != managerRange.second) {
             qli = managerRange.first->second;
         }
+        else {
+            qli = nullptr;  // Nếu không tìm thấy quản lý, gán nullptr
+        }
 }}
 void Kho::addManager(Manager *qly){
     qli=qly;

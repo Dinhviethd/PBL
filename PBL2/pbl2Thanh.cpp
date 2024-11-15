@@ -164,7 +164,7 @@ void print(int tl){
             break;
         case 3:
             cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
-            cout << "| Ma kho       | Ten kho                       | Gioi tinh   | Nam sinh  | Dia chi         |\n";  
+            cout << "| ID quan li       | Ten Quan Li                       | Gioi tinh   | Nam sinh  | Dia chi         |\n";  
             cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
             break;
 
