@@ -14,6 +14,8 @@ class Kho : public Entity {
     Manager *qli= nullptr;
     string loaiKho;
 public:
+    Kho();
+    Kho(string id, string name, int capacity, string loaiKho, string managerID, multimap<string, Manager*>& managers);
     void Nhap();
     void Xuat();
     void docFile(ifstream &f,multimap<string, Manager*>& managers);
@@ -25,6 +27,21 @@ public:
     void setLoaiKho(string &loai);
     string getLoaiKho();
 };
+Kho::Kho() : Entity() {
+    capacity = current_size = 0;
+    loaiKho = "";
+    qli = nullptr;
+}
+Kho::Kho(string id, string name, int capacity, string loaiKho, string managerID, multimap<string, Manager*>& managers)
+    : Entity(id, name), capacity(capacity), loaiKho(loaiKho) {
+    auto managerRange = managers.equal_range(managerID);
+    if (managerRange.first != managerRange.second) {
+        qli = managerRange.first->second;
+    } else {
+        qli = nullptr; 
+    }
+}
+
 void Kho::Nhap() {
     Entity::Nhap();
     cout<<"Nhap suc chua cua kho: ";
@@ -116,4 +133,5 @@ string Kho::getLoaiKho() {
 void Kho::setLoaiKho(string &loai) {
     loaiKho = loai;
 }
+
 #endif

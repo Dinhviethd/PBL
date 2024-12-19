@@ -98,7 +98,13 @@ void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
         }
     }
 }
-
+void xuatFile(LinkList &l1, LinkList &l2, LinkList &l3,
+             multimap<string, Product *> &products,
+             multimap<string, Kho *> &khoMap,
+             multimap<string, Manager *> &managers)
+{
+    
+}
 Kho *chonKho(LinkList &l2, int sl, string loai)
 {
     string info;
