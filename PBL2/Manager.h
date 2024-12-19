@@ -11,11 +11,22 @@ class Manager : public Entity {
     string gender;
     int birth;
 public:
+    Manager();
+    Manager(const string &id, const string &name, const string &gender, int birth, const string &mAdr);
     void Nhap();
     void Xuat();
     void docFile(ifstream &file);
     void chinhSuaThongTin();
 };
+
+Manager::Manager() : Entity() {
+    mAdr = "";
+    gender = "";
+    birth = 0;
+}
+
+Manager::Manager(const string &id, const string &name, const string &gender, int birth, const string &mAdr)
+    : Entity(id, name), gender(gender), birth(birth), mAdr(mAdr) {}
 
 void Manager::docFile(ifstream &file){
     string line;

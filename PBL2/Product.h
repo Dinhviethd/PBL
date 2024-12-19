@@ -17,6 +17,7 @@ protected:
     double donGia, thanhTien;
     Kho *kho= nullptr;
 public:
+    Product();
     void Nhap();
     void Xuat();
     void docFile(ifstream &file, multimap<string, Kho*>& _kho);
@@ -32,6 +33,12 @@ public:
     int getNgayNhap();
     void setThanhTien();
 };
+Product::Product(): Entity() {
+    loai = donVi = "";
+    sl = 0;
+    donGia = 0;
+    thanhTien = 0;
+}
 void Product::Nhap() {
     Entity::Nhap();
     cout << "Nhap loai hang: "; getline(cin, loai);
