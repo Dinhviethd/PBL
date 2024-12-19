@@ -12,6 +12,7 @@ using namespace std;
 class Product : public Entity {
 protected:
     string loai, donVi;
+    int ngayNhap;
     int sl;
     double donGia, thanhTien;
     Kho *kho= nullptr;
@@ -28,6 +29,8 @@ public:
     void themSPVaoKho(Kho *k);
     void chinhSuaThongTin();
     void themSL(int add);
+    int getNgayNhap();
+    void setThanhTien();
 };
 void Product::Nhap() {
     Entity::Nhap();
@@ -36,7 +39,7 @@ void Product::Nhap() {
     getline(cin >> ws, donVi);  
     cout << "Nhap so luong sp: "; cin >> sl; cin.ignore(); 
     cout << "Nhap don gia san pham: "; cin >> donGia;
-   
+    cout << "Nhap ngay nhap (1-31): "; cin >> ngayNhap;   
 }
 void Product::Xuat() {
     Entity::Xuat();
@@ -44,14 +47,15 @@ void Product::Xuat() {
          << " | " << setw(14) << left << donVi
          << " | " << setw(6) << left << sl
          << " | " << setw(10) << left << fixed << setprecision(2) << donGia
-         << " | " << setw(11) << left << TinhthanhTien();;
+         << " | " << setw(11) << left << thanhTien
+         << " | " << setw(8) << left << ngayNhap;
 
     if (kho) {
         cout << " | " << setw(11) << left << kho->getName()
-             << " | " << setw(11) << left << kho->getID() << " |" << endl;
+             << " | " << setw(11) << left << kho->getID() << "|" << endl;
     } else {
         cout << " | " << setw(11) << left << "N/A"
-             << " | " << setw(11) << left << "N/A" << " |" << endl;
+             << " | " << setw(11) << left << "N/A" << "|" << endl;
     }
 }
 void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
@@ -60,7 +64,7 @@ void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
         getline(file, line);
     if (getline(file, line)) {
         stringstream ss(line);
-        string slStr, donGiaStr;
+        string slStr, donGiaStr,ngayNhapStr;
         getline(ss, ID, '|');
         getline(ss, name, '|');
         getline(ss, loai, '|');
@@ -76,6 +80,8 @@ void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
         }
         kho->setCurrentSize(kho->getCurrentSize()+sl);
         thanhTien =TinhthanhTien();
+        getline(ss, ngayNhapStr, '|');
+        ngayNhap = stoi(ngayNhapStr);
     }
 }
 void Product::xuatFile(ofstream &file) {
@@ -184,5 +190,11 @@ void Product::themSL(int add) {
     } else {
         cout << "So luong cap nhat phai lon hon 0!" << endl;
     }
+}
+int Product::getNgayNhap() {
+        return ngayNhap;
+}
+void Product::setThanhTien(){
+    thanhTien=TinhthanhTien();
 }
 #endif

@@ -171,23 +171,25 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
                 l1.search(list->getID(), "ID", foundNode);
                 if (foundNode)
                 {
-                    Product *existingProduct = (Product*)foundNode->data;
-                    cout<<"Nhap so luong can them: ";
-                    cin>>choice;
+                    Product *existingProduct = (Product *)foundNode->data;
+                    cout << "Nhap so luong can them: ";
+                    cin >> choice;
                     existingProduct->themSL(choice);
+                    existingProduct->setThanhTien();
                     return;
                 }
             }
             else
             {
                 cout << "San pham bi trung, giu nguyen thong tin cu." << endl;
-                delete list; 
-                return;      
+                delete list;
+                return;
             }
         }
-        list->Nhap(); 
+        list->Nhap();
         l1.insertNode(list);
         Product *newProduct = (Product *)list;
+        newProduct->setThanhTien();
         xuatThongTin(l1, l2, l3, 2);
         Kho *selectedKho = chonKho(l2, newProduct->getSL(), newProduct->getLoai()); // Chọn kho và kiểm tra sức chứa
         if (selectedKho)
@@ -248,9 +250,9 @@ void print(int tl)
     switch (tl)
     {
     case 1:
-        cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+-------------+-------------+\n";
-        cout << "| Ma hang      | Ten hang                      | Loai           | DVT            | SL     | Don gia    | Thanh tien  |Thuoc Kho    | ID Kho	  |\n";
-        cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+-------------+-------------+\n";
+        cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+----------+-------------+------------+\n";
+        cout << "| Ma hang      | Ten hang                      | Loai           | DVT            | SL     | Don gia    | Thanh tien  | Ngay Nhap| Thuoc Kho   |ID Kho      |\n";
+        cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+----------+-------------+------------+\n";
         break;
     case 2:
         cout << "+--------------+-------------------------------+-------------+------------+----------------+---------------+---------------------+\n";
@@ -328,7 +330,35 @@ void printStatistics(LinkList &list)
          << "|\n";
     cout << "+---------------------+------------+-------------+\n";
 }
+void printStatisticsByDate(LinkList &list)
+{
+    map<int, int> quantityByDate;
+    map<int, double> valueByDate;
+    Node *temp = list.getHeader();
+    while (temp != NULL)
+    {
+        Product *product = (Product *)temp->data;
+        if (product)
+        {
+            int ngay = product->getNgayNhap();
+            quantityByDate[ngay] += product->getSL();
+            valueByDate[ngay] += product->getThanhTien();
+        }
+        temp = temp->next;
+    }
 
+    cout << "+-----------+-----------+------------+\n";
+    cout << "| Ngay nhap | So luong  |Tong gia tri|\n";
+    cout << "+-----------+-----------+------------+\n";
+    for (const auto &entry : quantityByDate)
+    {
+        cout << "| " << setw(10) << left << entry.first
+             << "| " << setw(10) << entry.second
+             << "| " << setw(11) << fixed << setprecision(2) << valueByDate[entry.first]
+             << "|\n";
+    }
+    cout << "+-----------+-----------+------------+\n";
+}
 int main()
 {
     LinkList l1, l2, l3;
@@ -487,7 +517,17 @@ login:
                     break;
 
                 case 7:
-                    printStatistics(l1);
+                    cout << "Thong ke theo (1: Loai hang, 2: Ngay nhap): ";
+                    int type;
+                    cin >> type;
+                    if (type == 1)
+                    {
+                        printStatistics(l1);
+                    }
+                    else if (type == 2)
+                    {
+                        printStatisticsByDate(l1);
+                    }
                     system("pause");
                     break;
                 case 8:
