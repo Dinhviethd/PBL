@@ -27,6 +27,7 @@ public:
     double getDonGia();
     void themSPVaoKho(Kho *k);
     void chinhSuaThongTin();
+    void themSL(int add);
 };
 void Product::Nhap() {
     Entity::Nhap();
@@ -43,7 +44,7 @@ void Product::Xuat() {
          << " | " << setw(14) << left << donVi
          << " | " << setw(6) << left << sl
          << " | " << setw(10) << left << fixed << setprecision(2) << donGia
-         << " | " << setw(11) << left << thanhTien;
+         << " | " << setw(11) << left << TinhthanhTien();;
 
     if (kho) {
         cout << " | " << setw(11) << left << kho->getName()
@@ -114,6 +115,10 @@ int Product::getSL(){
     return sl;
 }
 void Product::themSPVaoKho(Kho *k) {
+    if (k->getLoaiKho() != loai) {
+        cout << "San pham khong phu hop voi loai kho!" << endl;
+        return;
+    }
     if (k->getCurrentSize() + sl <= k->getCapacity()) {  
         kho = k;
         k->setCurrentSize(k->getCurrentSize() + sl);  
@@ -171,5 +176,13 @@ void Product::chinhSuaThongTin() {
             break;
     }
 }
-
+void Product::themSL(int add) {
+    if (add > 0) {
+        sl += add;
+        thanhTien = TinhthanhTien(); 
+        cout << "So luong san pham da duoc cap nhat thanh: " << sl << endl;
+    } else {
+        cout << "So luong cap nhat phai lon hon 0!" << endl;
+    }
+}
 #endif

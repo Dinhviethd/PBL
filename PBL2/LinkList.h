@@ -65,12 +65,8 @@ bool LinkList::search(string info, string _type, Node *&foundNode){
     return false;
 }
 bool LinkList::checkDuplicate(Entity *data){
-        Node* foundNode = NULL;
-    if (search(data->getID(), "ID", foundNode)) {
-        cout << "Phan tu voi ID '" << data->getID() << "' da ton tai trong danh sach. Khong them moi.\n";
-        return true;
-    }
-    return false;
+    Node* foundNode = NULL;
+    return search(data->getID(), "ID", foundNode);
 }
 void LinkList::insertNode(Entity *data) {
     Node *newNode = new Node();

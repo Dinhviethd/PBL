@@ -12,6 +12,7 @@ using namespace std;
 class Kho : public Entity {
     int capacity, current_size = 0;
     Manager *qli= nullptr;
+    string loaiKho;
 public:
     void Nhap();
     void Xuat();
@@ -21,16 +22,22 @@ public:
     void setCurrentSize(int size);
     int getCapacity();
     void chinhSuaThongTin();
+    void setLoaiKho(string &loai);
+    string getLoaiKho();
 };
 void Kho::Nhap() {
     Entity::Nhap();
     cout<<"Nhap suc chua cua kho: ";
     cin>>capacity;
+    cout << "Nhap loai kho: ";
+    cin.ignore();
+    getline(cin, loaiKho);
 }
 void Kho::Xuat() {
     Entity::Xuat();
 
     cout << " | " << setw(11) << left << capacity
+        << " | " << setw(10) << left << loaiKho
          << " | " << setw(14) << left << current_size;
     if (qli) cout<< " | " << setw(13) << left << qli->getID() << " | " << setw(19) << left << qli->getName()<< " |\n";
              
@@ -47,6 +54,7 @@ void Kho::docFile(ifstream &file, multimap<string, Manager*>& managers){
         getline(ss, name, '|');
         getline(ss, capacityStr, '|');
         capacity = stoi(capacityStr);
+        getline(ss, loaiKho, '|');
         getline(ss, managerID, '|');
         auto managerRange = managers.equal_range(managerID);
         if (managerRange.first != managerRange.second) {
@@ -92,11 +100,20 @@ void Kho::chinhSuaThongTin() {
             cin >> capacity;
             cin.ignore();
             break;
-        
+        case 4:
+            cout<<"Nhap loai kho moi (hien taij: "<< loaiKho <<"): ";
+            getline(cin, loaiKho);
+            break;
         default:
             cout << "Lua chon khong hop le." << endl;
             break;
     }
 }
+string Kho::getLoaiKho() {
+    return loaiKho;
+}
 
+void Kho::setLoaiKho(string &loai) {
+    loaiKho = loai;
+}
 #endif

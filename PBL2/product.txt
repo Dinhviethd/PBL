@@ -1,8 +1,8 @@
 ID|Name|loai|DVT|SL|DonGia|IDKho
-R001|AAA|VLXD|cai|10|1500|0001
-R002|BBB|Kim loai|chiec|15|800|0001
-R003|CCC|Gia dung|cai|5|1500|0002
-R004|DDD|Gia dung|kg|20|800|0002
-R005|EEE|VLXD|cai|8|1500|0003
-R006|FFF|Kim loai|cai|12|800|0001
-R007|GGG|Gia dung|cai|7|1500|0004
+R001|Son|VLXD|cai|10|1500|0003
+R002|Noi com dien|Gia dung|cai|15|800|0001
+R003|May Giat|Gia dung|cai|5|1500|0002
+R004|Dieu Hoa|Gia dung|cai|20|800|0002
+R005|Xi Mang|VLXD|bao|8|1500|0003
+R006|Sua lon|Thuc pham|cai|12|800|0005
+R007|May hut bui|Gia dung|cai|7|1500|0001
