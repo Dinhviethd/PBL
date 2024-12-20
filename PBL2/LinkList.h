@@ -11,6 +11,7 @@ struct Node {
         Node *prev;
 };
 class LinkList {
+    
     Node *header;
     Node *deleted;
 public:

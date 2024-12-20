@@ -41,12 +41,16 @@ Product::Product(): Entity() {
 }
 void Product::Nhap() {
     Entity::Nhap();
-    cout << "Nhap loai hang: "; getline(cin, loai);
+    cout << "Nhap loai hang: "; getline(std::cin, loai);
     cout << "Nhap don vi: "; 
-    getline(cin >> ws, donVi);  
-    cout << "Nhap so luong sp: "; cin >> sl; cin.ignore(); 
-    cout << "Nhap don gia san pham: "; cin >> donGia;
-    cout << "Nhap ngay nhap (1-31): "; cin >> ngayNhap;   
+    getline(std::cin >> ws, donVi);  
+    cout << "Nhap so luong sp: "; std::cin >> sl; std::cin.ignore(); 
+    cout << "Nhap don gia san pham: "; std::cin >> donGia;
+    while (1){
+    cout << "Nhap ngay nhap (1-31): "; std::cin >> ngayNhap;   
+    if (ngayNhap >=1 && ngayNhap <=31) break;
+    else cout << "Ngay nhap khong hop le! Vui long nhap lai...\n";
+    }
 }
 void Product::Xuat() {
     Entity::Xuat();
@@ -92,7 +96,7 @@ void Product::docFile(ifstream &file, multimap<string, Kho*>& _kho) {
     }
 }
 void Product::xuatFile(ofstream &file) {
-    cout << "ID|Name|loai|DVT|SL|DonGia|IDKho" << endl;
+    
     if (file.is_open()) {
         file << ID << "|" << name << "|" << loai << "|" << donVi << "|"
              << sl << "|" << fixed << setprecision(2) << donGia << "|";
@@ -101,6 +105,7 @@ void Product::xuatFile(ofstream &file) {
         } else {
             file << "N/A";  
         }
+        file  << "|" << ngayNhap;
         file << endl;
     } else {
         cerr << "Error: Could not open file for writing." << endl;

@@ -19,6 +19,7 @@ public:
     void Nhap();
     void Xuat();
     void docFile(ifstream &f,multimap<string, Manager*>& managers);
+    void xuatFile(ofstream &file);
     void addManager(Manager *qly);
     int getCurrentSize();
     void setCurrentSize(int size);

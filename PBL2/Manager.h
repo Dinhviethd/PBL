@@ -16,6 +16,7 @@ public:
     void Nhap();
     void Xuat();
     void docFile(ifstream &file);
+    void xuatFile(ofstream &file);
     void chinhSuaThongTin();
 };
 
@@ -39,6 +40,15 @@ void Manager::docFile(ifstream &file){
         getline(ss, gender, '|');
         getline(ss, mAdr, '|');
         ss>>birth;
+    }
+}
+void Manager::xuatFile(ofstream &file){
+    //ID|name|gender|address|birth
+    if (file.is_open()) {
+        file << ID << "|" << name << "|" << gender << "|" << mAdr << "|" << birth << endl;
+    } 
+    else {
+        cerr << "Error: Could not open file for writing." << endl;
     }
 }
 void Manager::Nhap() {
