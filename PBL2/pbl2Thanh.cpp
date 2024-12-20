@@ -30,9 +30,16 @@ login:
     cout << "│                                               │" << endl;
     cout << "│        Password:                              │" << endl;
     cout << "│                                               │" << endl;
+    cout << "│     Nhap exit de thoat...                     │" << endl;
     cout << "└───────────────────────────────────────────────┘" << endl;
     gotoxy(18, 8); 
     cin >> username;
+    if (username == "exit") {
+        system("cls");
+        textcolor(2);
+        cout << "Ban da thoat chuong trinh!";
+        return 0;
+    }
     gotoxy(18, 10); 
     cin >> password;
         if (username == "admin" && password == "12345")
@@ -40,6 +47,7 @@ login:
 
             while (1)
             {
+                textcolor(7);
                 system("cls");
                 cout << "=======   MENU  ==========\n";
                 cout << "1. Them thong tin\n";
@@ -57,7 +65,12 @@ login:
                 switch (choice)
                 {
                 case 0:
+                    cout << "Ban co muon luu file truoc khi dang xuat khong? \nBam Y de dong y, bam N de thoat.";
+                    if (getch()=='y'||(getch()=='Y')) {
                     xuatFile(l1, l2, l3, products, kho, managers);
+                    cout << "Luu file thanh cong!" << endl;
+                    system("pause");
+                    }
                     goto loginUI;
                 case 1:
                     cout << "Moi ban nhap thong tin can them: " << endl;

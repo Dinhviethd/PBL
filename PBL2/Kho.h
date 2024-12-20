@@ -82,6 +82,20 @@ void Kho::docFile(ifstream &file, multimap<string, Manager*>& managers){
             qli = nullptr;  // Nếu không tìm thấy quản lý, gán nullptr
         }
 }}
+void Kho::xuatFile(ofstream &file) {
+    //ID|Ten|SucChua|LoaiKho|Manager ID|
+    if (file.is_open()) {
+        file << ID << "|" << name << "|" << capacity << "|" << loaiKho << "|";
+        if (qli) {
+            file << qli->getID();
+        } else {
+            file << "N/A";  
+        }
+        file << endl;
+    } else {
+        cerr << "Error: Could not open file for writing." << endl;
+    }
+}
 void Kho::addManager(Manager *qly){
     qli=qly;
 }

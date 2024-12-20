@@ -117,28 +117,33 @@ void xuatFile(LinkList &l1, LinkList &l2, LinkList &l3,
 {
     ofstream fileProduct("producttest.txt");
     ofstream fileManager("managertest.txt");
-    ofstream fileKho("managertest.txt");
-    // for (const auto &node : l1) {
-    //     dynamic_cast<Product *>(node)->xuatFile(fileProduct);
-    // }
-    fileProduct << "ID|Name|loai|DVT|SL|DonGia|IDKho|NgayNhap" << endl;
-    Node *c1 = l1.getHeader(); 
-    auto *p1 = dynamic_cast<Product *>(c1->data);
+    ofstream fileKho("khotest.txt");
 
+    fileProduct << "ID|Name|Loai|DVT|SL|DonGia|IDKho|NgayNhap" << endl;
+    Node *c1 = l1.getHeader(); 
     while (c1 != nullptr) {
-       
-        p1->xuatFile(fileProduct);
+        auto *p1 = dynamic_cast<Product *>(c1->data);
+        if (p1) p1->xuatFile(fileProduct);
         c1 = c1->next;
     }
-    Node *current = l3.getHeader(); 
-    auto *p = dynamic_cast<Manager *>(current->data);
 
-    while (current != nullptr) {
-       
-         p->xuatFile(fileManager);
-        current = current->next;
+    fileKho << "ID|Ten|SucChua|LoaiKho|Manager ID|" << endl;
+    Node *c2 = l2.getHeader(); 
+    while (c2 != nullptr) {
+        auto *p2 = dynamic_cast<Kho *>(c2->data);
+        if (p2) p2->xuatFile(fileKho);
+        c2 = c2->next;
+    }
+
+    fileManager << "ID|Name|Gender|Address|Birth" << endl;
+    Node *c3 = l3.getHeader(); 
+    while (c3 != nullptr) {
+        auto *p3 = dynamic_cast<Manager *>(c3->data);
+        if (p3) p3->xuatFile(fileManager);
+        c3 = c3->next;
     }
 }
+
 Kho *chonKho(LinkList &l2, int sl, string loai)
 {
     string info;

@@ -99,7 +99,7 @@ void Product::xuatFile(ofstream &file) {
     
     if (file.is_open()) {
         file << ID << "|" << name << "|" << loai << "|" << donVi << "|"
-             << sl << "|" << fixed << setprecision(2) << donGia << "|";
+             << sl << "|"  << donGia << "|";
         if (kho) {
             file << kho->getID();
         } else {
