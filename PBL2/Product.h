@@ -32,6 +32,7 @@ public:
     void themSL(int add);
     int getNgayNhap();
     void setThanhTien();
+    Kho *getKho();
 };
 Product::Product(): Entity() {
     loai = donVi = "";
@@ -208,5 +209,8 @@ int Product::getNgayNhap() {
 }
 void Product::setThanhTien(){
     thanhTien=TinhthanhTien();
+}
+Kho *Product::getKho() {
+    return kho; 
 }
 #endif

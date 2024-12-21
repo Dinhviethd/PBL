@@ -111,35 +111,41 @@ void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
     }
 }
 void xuatFile(LinkList &l1, LinkList &l2, LinkList &l3,
-             multimap<string, Product *> &products,
-             multimap<string, Kho *> &khoMap,
-             multimap<string, Manager *> &managers)
+              multimap<string, Product *> &products,
+              multimap<string, Kho *> &khoMap,
+              multimap<string, Manager *> &managers)
 {
     ofstream fileProduct("producttest.txt");
     ofstream fileManager("managertest.txt");
     ofstream fileKho("khotest.txt");
 
     fileProduct << "ID|Name|Loai|DVT|SL|DonGia|IDKho|NgayNhap" << endl;
-    Node *c1 = l1.getHeader(); 
-    while (c1 != nullptr) {
+    Node *c1 = l1.getHeader();
+    while (c1 != nullptr)
+    {
         auto *p1 = dynamic_cast<Product *>(c1->data);
-        if (p1) p1->xuatFile(fileProduct);
+        if (p1)
+            p1->xuatFile(fileProduct);
         c1 = c1->next;
     }
 
     fileKho << "ID|Ten|SucChua|LoaiKho|Manager ID|" << endl;
-    Node *c2 = l2.getHeader(); 
-    while (c2 != nullptr) {
+    Node *c2 = l2.getHeader();
+    while (c2 != nullptr)
+    {
         auto *p2 = dynamic_cast<Kho *>(c2->data);
-        if (p2) p2->xuatFile(fileKho);
+        if (p2)
+            p2->xuatFile(fileKho);
         c2 = c2->next;
     }
 
     fileManager << "ID|Name|Gender|Address|Birth" << endl;
-    Node *c3 = l3.getHeader(); 
-    while (c3 != nullptr) {
+    Node *c3 = l3.getHeader();
+    while (c3 != nullptr)
+    {
         auto *p3 = dynamic_cast<Manager *>(c3->data);
-        if (p3) p3->xuatFile(fileManager);
+        if (p3)
+            p3->xuatFile(fileManager);
         c3 = c3->next;
     }
 }
@@ -216,11 +222,26 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
                 l1.search(list->getID(), "ID", foundNode);
                 if (foundNode)
                 {
-                    Product *existingProduct = (Product *)foundNode->data;
-                    cout << "Nhap so luong can them: ";
-                    cin >> choice;
-                    existingProduct->themSL(choice);
-                    existingProduct->setThanhTien();
+                    Product *existingProduct = dynamic_cast<Product *>(foundNode->data);
+                    if (existingProduct)
+                    {
+                        cout << "Nhap so luong can them: ";
+                        int sl;
+                        cin >> sl;
+                        Kho *currentKho = existingProduct->getKho();
+                        if (currentKho)
+                        {
+                            int newTotalQuantity = existingProduct->getSL() + sl;
+                            if (newTotalQuantity > currentKho->getCapacity())
+                            {
+                                cout << "Khong the cap nhat! So luong moi vuot qua suc chua cua kho." << endl;
+                                return; 
+                            }
+                        }
+                        existingProduct->themSL(sl);
+                        existingProduct->setThanhTien();
+                        cout << "Cap nhat so luong thanh cong!" << endl;
+                    }
                     return;
                 }
             }
