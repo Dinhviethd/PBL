@@ -8,20 +8,20 @@
 #include "LinkList.h"
 #include "Kho.h"
 #include <conio.h>
-#include <windows.h>
+// #include <windows.h>
 
 void print(int tl);
-void gotoxy(int x, int y) {
-    COORD coord;
-    coord.X = x;  // Tọa độ X
-    coord.Y = y;  // Tọa độ Y
-    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-}
-void textcolor(int textColor) {
-    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+// void gotoxy(int x, int y) {
+//     COORD coord;
+//     coord.X = x;  // Tọa độ X
+//     coord.Y = y;  // Tọa độ Y
+//     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+// }
+// void textcolor(int textColor) {
+//     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    SetConsoleTextAttribute(hConsole, textColor);
-}
+//     SetConsoleTextAttribute(hConsole, textColor);
+// }
 void xuatThongTin(LinkList &l1, LinkList &l2, LinkList &l3, int tl)
 {
     print(tl);
