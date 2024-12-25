@@ -15,6 +15,8 @@ public:
     Manager(const string &id, const string &name, const string &gender, int birth, const string &mAdr);
     void Nhap();
     void Xuat();
+    string getID() const override { return ID; }
+    string getName() const override { return name; }
     void docFile(ifstream &file);
     void xuatFile(ofstream &file);
     void chinhSuaThongTin();

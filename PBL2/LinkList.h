@@ -37,6 +37,7 @@ public:
     void output();
     bool checkDuplicate(Entity *data);
 };
+
 LinkList::LinkList() {
     header = NULL;
     deleted = NULL;
@@ -141,7 +142,7 @@ void LinkList::sort(string _type) {
     bool swapped;
     do {
         swapped = false;
-        Node *current = header;
+        Node *current = getHeader();
         
         while (current->next != NULL) {
             bool needSwap = false;
@@ -162,14 +163,15 @@ void LinkList::sort(string _type) {
         }
     } while (swapped);
 
-    cout << "Da sap xep theo yeu cau  ." << endl;
-    system("pause");
+    cout << "Da sap xep theo yeu cau." << endl;
 }
+
 void LinkList::output() {
     if (header == NULL) {
         cout << "Danh sach rong!" << endl;
         return;
     }
+    cnt = 0;
     Node *temp = header;
     while (temp != NULL) {
         temp->data->Xuat();

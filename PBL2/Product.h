@@ -24,6 +24,8 @@ public:
     void xuatFile(ofstream &file);
     double TinhthanhTien();
     string getLoai();
+    string getID() const override { return ID; }
+    string getName() const override { return name; }
     double getThanhTien();
     int getSL();
     double getDonGia();

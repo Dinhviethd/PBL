@@ -5,7 +5,9 @@
 #include <fstream>
 #include <cstring>
 #include <iomanip>
+
 using namespace std;
+int cnt = 0;
 class Entity {
 protected:
     string ID;
@@ -16,8 +18,8 @@ public:
     virtual ~Entity();
     virtual void Nhap();
     virtual void Xuat()=0;
-    virtual string getName() const;
-    virtual string getID() const;
+    virtual string getID() const = 0;  
+    virtual string getName() const = 0;
     virtual void setID();
     virtual void chinhSuaThongTin();
 };
@@ -36,15 +38,16 @@ void Entity::Nhap() {
     getline(cin >> ws, name);  
 }
 void Entity::Xuat() {
-    cout << "| " << setw(12) << left << ID
+    cout << "| " << setw(3) << left << ++cnt
+        << "| " << setw(12) << left << ID
          << " | " << setw(29) << left << name;
 }
-string Entity::getName() const {
-    return name;
-}
-string Entity::getID() const {
-    return ID;
-}
+// string Entity::getName() const {
+//     return name;
+// }
+// string Entity::getID() const {
+//     return ID;
+// }
 void Entity::chinhSuaThongTin(){
 }
 void Entity::setID(){

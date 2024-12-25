@@ -5,7 +5,7 @@ int main()
 {
     LinkList l1, l2, l3;
     Entity *list;
-    int tl, tl6;
+    char tl, tl6;
     multimap<string, Product *> products;
     multimap<string, Manager *> managers;
     multimap<string, Kho *> kho;
@@ -21,17 +21,19 @@ login:
     cout << "┌───────────────────────────────────────────────┐" << endl;
     cout << "│                                               │" << endl;
     cout << "│           PBL 2: DO AN CO SO LAP TRINH        │" << endl;
+    cout << "│           QUAN LY HANG NHAP TRONG 1 THANG     │" << endl;
     cout << "│                                               │" << endl;
     cout << "│        Created by: NGUYEN CHI THANH           │" << endl;
     cout << "│                    NGUYEN TA DINH VIET        │" << endl;
-    cout << "│                                               │" << endl;
     cout << "│                                               │" << endl;
     cout << "│        Username:                              │" << endl;
     cout << "│                                               │" << endl;
     cout << "│        Password:                              │" << endl;
     cout << "│                                               │" << endl;
-    cout << "│     Nhap exit de thoat...                     │" << endl;
+    cout << "│                                               │" << endl;
+    cout << "│ Nhap exit muc username de thoat CT...         │" << endl;
     cout << "└───────────────────────────────────────────────┘" << endl;
+    cout << endl;
     gotoxy(18, 8); 
     cin >> username;
     if (username == "exit") {
@@ -44,31 +46,27 @@ login:
     cin >> password;
         if (username == "admin" && password == "12345")
         {
-
+        gotoxy(5, 15); 
+        textcolor(2);
+        cout << "Dang nhap thanh cong, se vao menu trong 3s...";
+        Sleep(3000); 
             while (1)
             {
                 textcolor(7);
                 system("cls");
-                cout << "=======   MENU  ==========\n";
-                cout << "1. Them thong tin\n";
-                cout << "2. Xem thong tin\n";
-                cout << "3. Xoa thong tin\n";
-                cout << "4. Khoi phuc thong tin vua xoa\n";
-                cout << "5. Tim kiem thong tin (theo ID/Ten)\n";
-                cout << "6. Sap xep theo ID/Ten\n";
-                cout << "7. Thong ke thong tin hang\n";
-                cout << "8. Chinh sua thong tin\n";
-                cout << "0. Dang Xuat\n";
-                cout << "========================\n";
-                cout << "Chon: ";
+                showMenu();
+                gotoxy(38, 17);
                 cin >> choice;
+                system("cls");
                 switch (choice)
                 {
                 case 0:
                     cout << "Ban co muon luu file truoc khi dang xuat khong? \nBam Y de dong y, bam N de thoat.";
-                    if (getch()=='y'||(getch()=='Y')) {
+                    tl = getch();
+                    if (tl=='y'||tl=='Y') {
                     xuatFile(l1, l2, l3, products, kho, managers);
-                    cout << "Luu file thanh cong!" << endl;
+                    textcolor(2);
+                    cout << "\nLuu file thanh cong!" << endl;
                     system("pause");
                     }
                     goto loginUI;
@@ -87,20 +85,22 @@ login:
                     else if (tl == 1)
                     {
                         l1.output();
-                        system("pause");
+
                     }
                     else if (tl == 2)
                     {
                         l2.output();
-                        system("pause");
                     }
                     else if (tl == 3)
                     {
                         l3.output();
-                        system("pause");
                     }
-                    else
+                    else{
                         cout << "Sai loai thong tin. Vui long nhap lai" << endl;
+                        getch();
+                    }
+                    printLine(tl);
+                    system("pause");
                     break;
                 case 3:
                     cout << "Moi ban nhap thong tin can xoa: " << endl;
@@ -126,6 +126,7 @@ login:
                         cout << "Sai loai thong tin. Vui long nhap lai" << endl;
                         break;
                     }
+                    printLine(tl);
                     xoaThongTin(l1, l2, l3, tl);
                     cout << "Xoa thong tin thanh cong!\n";
                     system("pause");
@@ -180,6 +181,8 @@ login:
                         }
                         break;
                     }
+                    cout << "Da sap xep theo yeu cau cua nguoi dung theo yeu cau" << endl;
+                    system("pause");
                     break;
 
                 case 7:
@@ -214,6 +217,7 @@ login:
                     {
                         l3.output();
                     }
+                    printLine(tl);
                     cout << "Chon chi so (STT) cua thong tin cua de chinh sua: ";
                     cin >> index;
                     index--;
@@ -282,6 +286,8 @@ login:
         }
         else
         {
+             gotoxy(5, 15); 
+            textcolor(4);
             cout << "Dang nhap that bai!" << endl;
             system("pause");
         }

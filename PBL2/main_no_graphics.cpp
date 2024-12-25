@@ -5,7 +5,7 @@ int main()
 {
     LinkList l1, l2, l3;
     Entity *list;
-    int tl, tl6;
+    char tl, tl6;
     multimap<string, Product *> products;
     multimap<string, Manager *> managers;
     multimap<string, Kho *> kho;
@@ -49,7 +49,8 @@ login:
                 {
                 case 0:
                     cout << "Ban co muon luu file truoc khi dang xuat khong? \nBam Y de dong y, bam N de thoat.";
-                    if (getch()=='y'||(getch()=='Y')) {
+                    tl = getch();
+                    if (tl=='y'||tl=='Y') {
                     xuatFile(l1, l2, l3, products, kho, managers);
                     cout << "Luu file thanh cong!" << endl;
                     system("pause");
@@ -254,7 +255,6 @@ login:
                         cout << "Tim thay phan tu can tim:\n";
                         print(tl);
                         foundNode->data->Xuat();
-                        system("pause");
                     }
                     else
                         cout << "Khong tim thay gia tri can tim\n";

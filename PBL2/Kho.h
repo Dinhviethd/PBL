@@ -21,6 +21,8 @@ public:
     void docFile(ifstream &f,multimap<string, Manager*>& managers);
     void xuatFile(ofstream &file);
     void addManager(Manager *qly);
+    string getID() const override { return ID; }
+    string getName() const override { return name; }
     int getCurrentSize();
     void setCurrentSize(int size);
     int getCapacity();

@@ -8,20 +8,55 @@
 #include "LinkList.h"
 #include "Kho.h"
 #include <conio.h>
-// #include <windows.h>
+#include <windows.h>
 
 void print(int tl);
-// void gotoxy(int x, int y) {
-//     COORD coord;
-//     coord.X = x;  // Tọa độ X
-//     coord.Y = y;  // Tọa độ Y
-//     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
-// }
-// void textcolor(int textColor) {
-//     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+void printLine(int tl){
+    switch (tl){
+    case 1:
+        cout << "+----+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+----------+-------------+------------+\n";
+        break;
+    case 2:
+        cout << "+----+--------------+-------------------------------+-------------+------------+----------------+---------------+---------------------+\n";
+        break;
+    case 3:
+        cout << "+----+--------------+-------------------------------+-------------+-----------+-----------------+\n";
+        break;
+    }
+    
+}
+void gotoxy(int x, int y) {
+    COORD coord;
+    coord.X = x;  // Tọa độ X
+    coord.Y = y;  // Tọa độ Y
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+void textcolor(int textColor) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-//     SetConsoleTextAttribute(hConsole, textColor);
-// }
+    SetConsoleTextAttribute(hConsole, textColor);
+}
+void showMenu() {
+    cout << "┌──────────────────────────────────────────────────────┐" << endl;
+    cout << "│                                                      │" << endl;
+    cout << "│            PBL 2: DO AN CO SO LAP TRINH              │" << endl;
+    cout << "│           QUAN LY HANG NHAP TRONG 1 THANG            │" << endl;
+    cout << "│                                                      │" << endl;
+    cout << "│                        MENU                          │" << endl;
+    cout << "│                                                      │" << endl;
+    cout << "│        1. Them thong tin                             │" << endl;
+    cout << "│        2. Xem thong tin                              │" << endl;
+    cout << "│        3. Xoa thong tin                              │" << endl;
+    cout << "│        4. Khoi phuc thong tin vua xoa                │" << endl;
+    cout << "│        5. Tim kiem thong tin                         │" << endl;
+    cout << "│        6. Sap xep thong tin                          │" << endl;
+    cout << "│        7. Thong ke thong tin hang                    │" << endl;
+    cout << "│        8. Chinh sua thong tin                        │" << endl;
+    cout << "│        0. Dang xuat                                  │" << endl;
+    cout << "│                                                      │" << endl;
+    cout << "│     Moi ban nhap lua chon:                           │" << endl;
+    cout << "└──────────────────────────────────────────────────────┘" << endl;
+}
 void xuatThongTin(LinkList &l1, LinkList &l2, LinkList &l3, int tl)
 {
     print(tl);
@@ -303,12 +338,13 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
 int selectOption()
 {
     int tl;
-    cout << "Chon du lieu ban muon truy van: " << endl;
+    cout << "Chon du lieu ban muon xu ly: " << endl;
     cout << "1. Hang hoa" << endl;
     cout << "2. Kho" << endl;
     cout << "3. Nguoi quan ly" << endl;
     cout << "0. Thoat" << endl;
     cin >> tl;
+    if (tl==0) cout << "Da dung qua trinh truy van. Bam phim bat ky de quay lai menu.\n";
     return tl;
 }
 void print(int tl)
@@ -316,22 +352,23 @@ void print(int tl)
     switch (tl)
     {
     case 1:
-        cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+----------+-------------+------------+\n";
-        cout << "| Ma hang      | Ten hang                      | Loai           | DVT            | SL     | Don gia    | Thanh tien  | Ngay Nhap| Thuoc Kho   |ID Kho      |\n";
-        cout << "+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+----------+-------------+------------+\n";
+        cout << "+----+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+----------+-------------+------------+\n";
+        cout << "|STT | Ma hang      | Ten hang                      | Loai           | DVT            | SL     | Don gia    | Thanh tien  | Ngay Nhap| Thuoc Kho   |ID Kho      |\n";
+        cout << "+----+--------------+-------------------------------+----------------+----------------+--------+------------+-------------+----------+-------------+------------+\n";
         break;
     case 2:
-        cout << "+--------------+-------------------------------+-------------+------------+----------------+---------------+---------------------+\n";
-        cout << "| Ma kho       | Ten kho                       | Suc chua    |Loai Kho    | SL hien tai    | ID quan li    | Ten quan li         |\n";
-        cout << "+--------------+-------------------------------+-------------+------------+----------------+---------------+---------------------+\n";
+        cout << "+----+--------------+-------------------------------+-------------+------------+----------------+---------------+---------------------+\n";
+        cout << "|STT | Ma kho       | Ten kho                       | Suc chua    |Loai Kho    | SL hien tai    | ID quan li    | Ten quan li         |\n";
+        cout << "+----+--------------+-------------------------------+-------------+------------+----------------+---------------+---------------------+\n";
         break;
     case 3:
-        cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
-        cout << "| ID quan li   | Ten Quan Li                   | Gioi tinh   | Nam sinh  | Dia chi         |\n";
-        cout << "+--------------+-------------------------------+-------------+-----------+-----------------+\n";
+        cout << "+----+--------------+-------------------------------+-------------+-----------+-----------------+\n";
+        cout << "|STT | ID quan li   | Ten Quan Li                   | Gioi tinh   | Nam sinh  | Dia chi         |\n";
+        cout << "+----+--------------+-------------------------------+-------------+-----------+-----------------+\n";
         break;
     }
 }
+
 void printStatistics(LinkList &list)
 {
     double totalPrice = 0;
