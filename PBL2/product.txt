@@ -1,4 +1,4 @@
-ID|Name|loai|DVT|SL|DonGia|IDKho|NgayNhap
+ID|Name|Loai|DVT|SL|DonGia|IDKho|NgayNhap
 R001|Son|VLXD|cai|10|1500|0003|23
 R002|Noi com dien|Gia dung|cai|15|800|0001|21
 R003|May Giat|Gia dung|cai|5|1500|0002|24

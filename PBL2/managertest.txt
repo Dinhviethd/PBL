@@ -1,6 +1,0 @@
-ID|Name|Gender|Address|Birth
-001|Nguyen Thi B|Nu|Ha Noi|1999
-002|Tran D|Nam|TPHCM|1986
-003|Nguyen Van A|Nam|Da Nang|1987
-004|Tran Duc S|Nam|Quang Nam|1997
-005|Le Van Sinh|Nam|Quang Ngai|1998

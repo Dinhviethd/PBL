@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstring>
+#include <string>
 #include <unordered_map>
 #include <sstream>
 #include <fstream>
@@ -9,7 +9,10 @@
 #include "Kho.h"
 #include <conio.h>
 #include <windows.h>
-
+#define red 4
+#define green 2
+#define white 7
+#define blue 3
 void print(int tl);
 void printLine(int tl){
     switch (tl){
@@ -37,6 +40,7 @@ void textcolor(int textColor) {
     SetConsoleTextAttribute(hConsole, textColor);
 }
 void showMenu() {
+	textcolor(blue);
     cout << "┌──────────────────────────────────────────────────────┐" << endl;
     cout << "│                                                      │" << endl;
     cout << "│            PBL 2: DO AN CO SO LAP TRINH              │" << endl;
@@ -150,9 +154,9 @@ void xuatFile(LinkList &l1, LinkList &l2, LinkList &l3,
               multimap<string, Kho *> &khoMap,
               multimap<string, Manager *> &managers)
 {
-    ofstream fileProduct("producttest.txt");
-    ofstream fileManager("managertest.txt");
-    ofstream fileKho("khotest.txt");
+    ofstream fileProduct("product.txt");
+    ofstream fileManager("manager.txt");
+    ofstream fileKho("kho.txt");
 
     fileProduct << "ID|Name|Loai|DVT|SL|DonGia|IDKho|NgayNhap" << endl;
     Node *c1 = l1.getHeader();
@@ -198,11 +202,13 @@ Kho *chonKho(LinkList &l2, int sl, string loai)
             Kho *selectedKho = (Kho *)foundNode->data;
             if (selectedKho->getLoaiKho() != loai)
             {
+            	textcolor(red);
                 cout << "Loi: Loai kho khong phu hop voi loai san pham!" << endl;
                 continue;
             }
             if (selectedKho->getCurrentSize() + sl <= selectedKho->getCapacity())
             {
+            	textcolor(green);
                 cout << "Da chon kho: " << selectedKho->getName() << endl;
                 return selectedKho;
             }
@@ -213,6 +219,7 @@ Kho *chonKho(LinkList &l2, int sl, string loai)
         }
         else
         {
+        	textcolor(red);
             cout << "Khong tim thay kho voi ID nay. Vui long nhap lai!" << endl;
         }
     }
@@ -247,10 +254,12 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
         list->setID();
         if (l1.checkDuplicate(list))
         {
+        	textcolor(4);
             cout << "Phan tu voi ID '" << list->getID() << "' da ton tai trong danh sach." << endl;
             cout << "Ban co muon cap nhat them so luong khong? (1. Co  2. Khong): ";
             int choice;
             cin >> choice;
+            textcolor(7);
             if (choice == 1)
             {
                 Node *foundNode = NULL;
@@ -269,12 +278,14 @@ void nhapBanPhim(LinkList &l1, LinkList &l2, LinkList &l3, int tl, Entity *list)
                             int newTotalQuantity = existingProduct->getSL() + sl;
                             if (newTotalQuantity > currentKho->getCapacity())
                             {
+                            	textcolor(4);
                                 cout << "Khong the cap nhat! So luong moi vuot qua suc chua cua kho." << endl;
                                 return; 
                             }
                         }
                         existingProduct->themSL(sl);
                         existingProduct->setThanhTien();
+                        textcolor(2);
                         cout << "Cap nhat so luong thanh cong!" << endl;
                     }
                     return;
