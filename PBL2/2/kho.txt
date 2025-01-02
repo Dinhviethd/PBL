@@ -1,6 +1,4 @@
 ID|Ten|SucChua|LoaiKho|Manager ID|
 0001|Kho G|100|Gia dung|001
 0002|Kho T1|200|Gia dung|002
-0003|Kho T2|50|VLXD|001
-0004|Kho 2A|300|VLXD|003
 0005|Kho 1A|40|Thuc Pham|004

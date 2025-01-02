@@ -8,6 +8,7 @@
 
 using namespace std;
 int cnt = 0;
+int month = 0;
 class Entity {
 protected:
     string ID;
@@ -53,5 +54,26 @@ void Entity::chinhSuaThongTin(){
 void Entity::setID(){
     cout << "Nhap ID: "; 
     getline(cin >> ws, ID);  
+}
+bool checkDate(int day, int month){
+    if (day<=0) return 0;
+    switch(month){
+        case 1:
+        case 3:
+        case 5:
+        case 7:
+        case 8:
+        case 10:
+        case 12:
+        if (day>31) return 0;
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+        if (day>30) return 0;
+        case 2: if (day>29) return 0;
+        
+    }
+    return 1;
 }
 #endif

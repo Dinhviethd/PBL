@@ -41,6 +41,7 @@ login:
                 cout << "6. Sap xep theo ID/Ten\n";
                 cout << "7. Thong ke thong tin hang\n";
                 cout << "8. Chinh sua thong tin\n";
+                cout << "9. Tra cuu thang khac\n";
                 cout << "0. Dang Xuat\n";
                 cout << "========================\n";
                 cout << "Chon: ";
@@ -215,6 +216,13 @@ login:
                     }
                     cout << "Da sua thong tin theo yeu cau!\n";
                     system("pause");
+                    break;
+                case 9:
+                    system("cls");
+                    cout << "Nhap thang can xem:";
+                    cin >> month;
+                    l1.clearAll();l2.clearAll();l3.clearAll();
+                    docFile(l1, l2, l3, products, kho, managers);
                     break;
                 case 5:
                     tl = selectOption();

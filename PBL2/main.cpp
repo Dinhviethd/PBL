@@ -1,4 +1,5 @@
 #include "System.cpp"
+
 using namespace std;
 
 int main()
@@ -9,6 +10,7 @@ int main()
     multimap<string, Product *> products;
     multimap<string, Manager *> managers;
     multimap<string, Kho *> kho;
+    
     docFile(l1, l2, l3, products, kho, managers);
     string username, password;
     int choice;
@@ -48,8 +50,8 @@ login:
         {
         gotoxy(5, 15); 
         textcolor(2);
-        cout << "Dang nhap thanh cong, se vao menu trong 3s...";
-        Sleep(3000); 
+        cout << "Dang nhap thanh cong, se vao menu trong giay lat...";
+        Sleep(1000); 
             while (1)
             {
                 textcolor(7);
@@ -236,6 +238,13 @@ login:
                     }
                     cout << "Da sua thong tin theo yeu cau!\n";
                     system("pause");
+                    break;
+                case 9:
+                    system("cls");
+                    cout << "Nhap thang can xem:";
+                    cin >> month;
+                    l1.clearAll();l2.clearAll();l3.clearAll();
+                    docFile(l1, l2, l3, products, kho, managers);
                     break;
                 case 5:
                     tl = selectOption();

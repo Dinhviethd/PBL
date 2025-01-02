@@ -36,6 +36,7 @@ public:
     void sort(string _type);
     void output();
     bool checkDuplicate(Entity *data);
+    void clearAll();
 };
 
 LinkList::LinkList() {
@@ -178,5 +179,15 @@ void LinkList::output() {
         temp = temp->next;
     }
 }
-
+void LinkList::clearAll() {
+    Node *current = header;
+    while (current != NULL) {
+        Node *next = current->next;
+        delete current->data; 
+        delete current;        
+        current = next;
+    }
+    header = NULL; 
+ 
+}
 #endif

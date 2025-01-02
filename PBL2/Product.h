@@ -50,8 +50,8 @@ void Product::Nhap() {
     cout << "Nhap so luong sp: "; std::cin >> sl; std::cin.ignore(); 
     cout << "Nhap don gia san pham: "; std::cin >> donGia;
     while (1){
-    cout << "Nhap ngay nhap (1-31): "; std::cin >> ngayNhap;   
-    if (ngayNhap >=1 && ngayNhap <=31) break;
+    cout << "Nhap ngay nhap: "; std::cin >> ngayNhap;   
+    if (checkDate(ngayNhap,month)) break;
     else cout << "Ngay nhap khong hop le! Vui long nhap lai...\n";
     }
 }

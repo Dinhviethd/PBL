@@ -1,0 +1,4 @@
+ID|Name|Gender|Address|Birth
+001|Nguyen Thi B|Nu|Ha Noi|1999
+002|Tran D|Nam|TPHCM|1986
+003|Nguyen Van A|Nam|Da Nang|1987

@@ -9,10 +9,12 @@
 #include "Kho.h"
 #include <conio.h>
 #include <windows.h>
+#include <ctime>
 #define red 4
 #define green 2
 #define white 7
 #define blue 3
+
 void print(int tl);
 void printLine(int tl){
     switch (tl){
@@ -27,6 +29,15 @@ void printLine(int tl){
         break;
     }
     
+}
+int getMonth(){
+    time_t now = time(0);
+
+    tm *ltm = localtime(&now);
+
+    month = 1 + ltm->tm_mon;
+   //string str_month = to_string(month);
+    return month;
 }
 void gotoxy(int x, int y) {
     COORD coord;
@@ -117,9 +128,16 @@ void docFile(LinkList &l1, LinkList &l2, LinkList &l3,
              multimap<string, Kho *> &khoMap,
              multimap<string, Manager *> &managers)
 {
+    string Month ;
+    if (month==0) Month = to_string(getMonth());
+    else Month = to_string(month);
+    string basePath = "./" + Month + "/";
     ifstream fileKho("kho.txt");
     ifstream fileProduct("product.txt");
     ifstream fileManager("manager.txt");
+    // ifstream fileKho(basePath + "kho.txt");
+    // ifstream fileProduct(basePath + "product.txt");
+    // ifstream fileManager(basePath + "manager.txt");
     while (!fileManager.eof())
     {
         Manager *m = new Manager;
@@ -154,10 +172,16 @@ void xuatFile(LinkList &l1, LinkList &l2, LinkList &l3,
               multimap<string, Kho *> &khoMap,
               multimap<string, Manager *> &managers)
 {
+    string Month;
+    if (month==0) Month = to_string(getMonth());
+    else Month = to_string(month);
+    string basePath = "./" + Month + "/";
+    ofstream fileKho("kho.txt");
     ofstream fileProduct("product.txt");
     ofstream fileManager("manager.txt");
-    ofstream fileKho("kho.txt");
-
+    // ofstream fileKho(basePath + "kho.txt");
+    // ofstream fileProduct(basePath + "product.txt");
+    // ofstream fileManager(basePath + "manager.txt");
     fileProduct << "ID|Name|Loai|DVT|SL|DonGia|IDKho|NgayNhap" << endl;
     Node *c1 = l1.getHeader();
     while (c1 != nullptr)
